@@ -13,18 +13,18 @@ public class FibonacciFinder
     }
     max = Math.max(2, max);
     storedResults = new BigInteger[max+1];
+    storedResults[0] = BigInteger.ONE;
     storedResults[1] = BigInteger.ONE;
     storedResults[2] = BigInteger.ONE;
   }
-  // Useful if you calc fib lots of times
-  public BigInteger solveUsingSavedValues(int n) {
+  public BigInteger solveCachingResults(int n) {
     if (n <= 2) {
       return BigInteger.ONE;
     } else if (n > storedResults.length) {
       throw new IllegalArgumentException("Only saving values up to " + storedResults.length
-            + " but asked to solve for nth fibonacci number, n: " + n);
+          + " but asked to solve for nth fibonacci number, n: " + n);
     }
-    int startIndex = 0;
+    int startIndex = 2;
     while (storedResults[startIndex] != null && startIndex < n) {
       startIndex++;
     }
@@ -32,6 +32,10 @@ public class FibonacciFinder
       storedResults[i] = storedResults[i-1].add(storedResults[i-2]);
     }
     return storedResults[n];
+  }
+  // Useful if you calc fib lots of times TODO refactor tests to non-static
+  public static BigInteger solveUsingSavedValues(int n) {
+    return new FibonacciFinder(n+5).solveCachingResults(n);
   }
   @Deprecated // solveUsingMatrices method is faster, use that instead.
   public static BigInteger solveSimply(int n) {
