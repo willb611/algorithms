@@ -6,4 +6,4 @@ Some simple programs to solve common algorithmic problems.
 Built using gradle. It should be distributed with a gradle wrapper.
 https://docs.gradle.org/current/userguide/gradle_wrapper.html
 
-Style checked
+Style checked using the plugin 'checkstyle' against Google Java code style.
