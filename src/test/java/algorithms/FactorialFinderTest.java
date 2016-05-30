@@ -1,3 +1,5 @@
+package algorithms;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -6,8 +8,7 @@ import java.math.BigInteger;
 
 import static org.junit.Assert.assertEquals;
 
-public class FactorialFinderTest
-{
+public class FactorialFinderTest {
   @Rule
   public ExpectedException expectedException = ExpectedException.none();
 

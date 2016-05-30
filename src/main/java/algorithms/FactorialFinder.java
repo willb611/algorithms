@@ -1,11 +1,11 @@
+package algorithms;
+
 import java.math.BigInteger;
 
 public class FactorialFinder
 {
   private BigInteger[] factorials;
-  private final int max;
   public FactorialFinder(int max) {
-    this.max = max;
     factorials = new BigInteger[max+1];
     factorials[0]=BigInteger.ONE;
   }
