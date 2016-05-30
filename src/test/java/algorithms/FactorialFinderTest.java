@@ -1,12 +1,12 @@
 package algorithms;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.math.BigInteger;
-
-import static org.junit.Assert.assertEquals;
 
 public class FactorialFinderTest {
   @Rule
@@ -18,6 +18,7 @@ public class FactorialFinderTest {
     expectedException.expect(IllegalArgumentException.class);
     factorialFinder.findFactorialOf(-1);
   }
+
   @Test
   public void testLowerBoundary() {
     FactorialFinder factorialFinder = new FactorialFinder(5);
@@ -25,6 +26,7 @@ public class FactorialFinderTest {
     BigInteger actual = factorialFinder.findFactorialOf(0);
     assertEquals(expected, actual);
   }
+
   @Test
   public void testJustAboveLowerBoundary() {
     FactorialFinder factorialFinder = new FactorialFinder(5);
@@ -32,6 +34,7 @@ public class FactorialFinderTest {
     BigInteger actual = factorialFinder.findFactorialOf(1);
     assertEquals(expected, actual);
   }
+
   @Test
   public void testSomeReasonableNumber() {
     FactorialFinder factorialFinder = new FactorialFinder(25);
@@ -39,6 +42,7 @@ public class FactorialFinderTest {
     BigInteger actual = factorialFinder.findFactorialOf(15);
     assertEquals(expected, actual);
   }
+
   @Test
   public void testSomeAnotherReasonableNumber() {
     FactorialFinder factorialFinder = new FactorialFinder(15);
@@ -46,6 +50,7 @@ public class FactorialFinderTest {
     BigInteger actual = factorialFinder.findFactorialOf(7);
     assertEquals(expected, actual);
   }
+
   @Test
   public void testSomeMassiveNumber() {
     FactorialFinder factorialFinder = new FactorialFinder(500);

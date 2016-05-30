@@ -1,22 +1,23 @@
 package algorithms;
 
-import java.math.BigInteger;
-
 import static algorithms.Preconditions.checkNotNull;
 
-public class FibonacciFinder
-{
+import java.math.BigInteger;
+
+public class FibonacciFinder {
   private BigInteger[] storedResults;
+
   public FibonacciFinder(int max) {
     if (max < 0) {
       throw new IllegalArgumentException("Can only find fibonacci numbers of at least 0");
     }
     max = Math.max(2, max);
-    storedResults = new BigInteger[max+1];
+    storedResults = new BigInteger[max + 1];
     storedResults[0] = BigInteger.ONE;
     storedResults[1] = BigInteger.ONE;
     storedResults[2] = BigInteger.ONE;
   }
+
   public BigInteger solveCachingResults(int n) {
     if (n <= 2) {
       return BigInteger.ONE;
@@ -29,14 +30,16 @@ public class FibonacciFinder
       startIndex++;
     }
     for (int i = startIndex; i <= n; i++) {
-      storedResults[i] = storedResults[i-1].add(storedResults[i-2]);
+      storedResults[i] = storedResults[i - 1].add(storedResults[i - 2]);
     }
     return storedResults[n];
   }
+
   // Useful if you calc fib lots of times TODO refactor tests to non-static
   public static BigInteger solveUsingSavedValues(int n) {
-    return new FibonacciFinder(n+5).solveCachingResults(n);
+    return new FibonacciFinder(n + 5).solveCachingResults(n);
   }
+
   @Deprecated // solveUsingMatrices method is faster, use that instead.
   public static BigInteger solveSimply(int n) {
     if (n <= 2) {
@@ -44,12 +47,12 @@ public class FibonacciFinder
     }
     BigInteger fibOfNMinusOne = BigInteger.ONE;
     BigInteger fibOfNMinusTwo = BigInteger.ONE;
-    int i = 2;
-    while (i < n) {
+    int currentN = 2;
+    while (currentN < n) {
       BigInteger fibOfI = fibOfNMinusOne.add(fibOfNMinusTwo);
       fibOfNMinusTwo = fibOfNMinusOne;
       fibOfNMinusOne = fibOfI;
-      i++;
+      currentN++;
     }
     return fibOfNMinusOne;
   }
@@ -62,17 +65,17 @@ public class FibonacciFinder
     T[0] = new int[]{0, 1};
     T[1] = new int[]{1, 1};
     final int[] F1 = new int[]{1,1};
-    return matrixMul(raiseMatrixToThePower(T, n-2), F1)[1];
+    return matrixMul(raiseMatrixToThePower(T, n - 2), F1)[1];
   }
 
   private static int[][] raiseMatrixToThePower(int[][] matrix, int power) {
     checkNotNull(matrix);
     if (power == 1) {
       return matrix;
-    } else if (power%2 == 1) {
-      return matrixMul(matrix, raiseMatrixToThePower(matrix, power-1));
+    } else if (power % 2 == 1) {
+      return matrixMul(matrix, raiseMatrixToThePower(matrix, power - 1));
     } else {
-      int[][] X = raiseMatrixToThePower(matrix, power/2);
+      int[][] X = raiseMatrixToThePower(matrix, power / 2);
       return matrixMul(X, X);
     }
   }
@@ -89,7 +92,7 @@ public class FibonacciFinder
       for (int col = 0; col < A[0].length; col++) {
         // calculate this thing.
         int res = 0;
-        for (int i=0;i<2;i++) {
+        for (int i = 0; i < 2; i++) {
           res += A[row][i] * B[i][col];
         }
         resultingMatrix[row][col] = res;
@@ -97,6 +100,7 @@ public class FibonacciFinder
     }
     return resultingMatrix;
   }
+
   private static int[] matrixMul(int[][] A, int[] B) {
     checkNotNull(A);
     checkNotNull(B);
