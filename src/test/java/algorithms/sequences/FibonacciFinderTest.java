@@ -31,6 +31,17 @@ public class FibonacciFinderTest {
    * 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811.
   */
   @Test
+  public void testFindNthTermBase() {
+    BigInteger expected = BigInteger.ONE;
+    assertEquals(expected, fibonacciFinder.findNthTermInSequence(0));
+    assertEquals(expected, fibonacciFinder.findNthTermInSequence(0));
+
+    assertEquals(expected, fibonacciFinder.findNthTermInSequence(1));
+    assertEquals(expected, fibonacciFinder.findNthTermInSequence(1));
+  }
+
+
+  @Test
   public void testFindNthTermSmall() {
     assertEquals(BigInteger.valueOf(5), fibonacciFinder.findNthTermInSequence(5));
     assertEquals(BigInteger.valueOf(5), fibonacciFinder.findNthTermInSequence(5));
@@ -40,6 +51,13 @@ public class FibonacciFinderTest {
   public void testFindNthTermMedium() {
     assertEquals(BigInteger.valueOf(4181), fibonacciFinder.findNthTermInSequence(19));
     assertEquals(BigInteger.valueOf(4181), fibonacciFinder.findNthTermInSequence(19));
+  }
+
+  @Test
+  public void testFindNthTermLarge() {
+    BigInteger expected = BigInteger.valueOf(75025);
+    assertEquals(expected, fibonacciFinder.findNthTermInSequence(25));
+    assertEquals(expected, fibonacciFinder.findNthTermInSequence(25));
   }
 
 }
