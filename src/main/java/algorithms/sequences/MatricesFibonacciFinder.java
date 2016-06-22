@@ -12,10 +12,9 @@ public class MatricesFibonacciFinder implements FibonacciFinder {
       return BigInteger.ONE;
     }
     final int[][] T = new int[2][2];
-    T[0] = new int[]{0, 1};
-    T[1] = new int[]{1, 1};
-    final int[] F1 = new int[]{1,1};
-    int result = matrixMul(raiseMatrixToThePower(T, n - 2), F1)[1];
+    T[0] = new int[]{1, 1};
+    T[1] = new int[]{1, 0};
+    int result = raiseMatrixToThePower(T, n - 1)[0][0];
     return new BigInteger(Integer.toString(result));
   }
 
@@ -26,8 +25,8 @@ public class MatricesFibonacciFinder implements FibonacciFinder {
     } else if (power % 2 == 1) {
       return matrixMul(matrix, raiseMatrixToThePower(matrix, power - 1));
     } else {
-      int[][] X = raiseMatrixToThePower(matrix, power / 2);
-      return matrixMul(X, X);
+      int[][] matrixRaisedToHalfPow = raiseMatrixToThePower(matrix, power / 2);
+      return matrixMul(matrixRaisedToHalfPow, matrixRaisedToHalfPow);
     }
   }
 
@@ -51,23 +50,4 @@ public class MatricesFibonacciFinder implements FibonacciFinder {
     }
     return resultingMatrix;
   }
-
-  private static int[] matrixMul(int[][] A, int[] B) {
-    checkNotNull(A);
-    checkNotNull(B);
-    if (A[0].length != B.length) {
-      throw new IllegalArgumentException("Length of two matrices must be the same");
-    }
-    int[] resultingMatrix = new int[B.length];
-    for (int row = 0; row < B.length; row++) {
-      int res = 0;
-      // col = colnumber in a, rownumber in b
-      for (int col = 0; col < A[row].length; col++) {
-        res += A[row][col] * B[col];
-      }
-      resultingMatrix[row] = res;
-    }
-    return resultingMatrix;
-  }
-
 }

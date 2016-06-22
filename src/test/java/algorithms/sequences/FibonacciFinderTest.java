@@ -13,6 +13,7 @@ import java.util.Collection;
 @RunWith(Parameterized.class)
 public class FibonacciFinderTest {
   public static final int nthTermBiggerThanUsedInTest = 100;
+
   @Parameterized.Parameters
   public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][] {
