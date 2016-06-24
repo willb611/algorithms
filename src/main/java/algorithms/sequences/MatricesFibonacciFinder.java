@@ -3,7 +3,7 @@ package algorithms.sequences;
 import java.math.BigInteger;
 
 import static algorithms.Preconditions.checkNotNull;
-// TODO make this use bigInteger properly
+
 public class MatricesFibonacciFinder implements FibonacciFinder {
 
   @Override
