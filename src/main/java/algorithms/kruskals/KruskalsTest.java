@@ -1,6 +1,8 @@
 package algorithms.kruskals;
 
 import structures.graph.Graph;
+import structures.graph.generation.GraphGenerator;
+import structures.graph.serializers.GraphIntoWhateverFormatConverter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +21,7 @@ public class KruskalsTest {
     System.out.println("Printing mst");
     System.out.println(mst);
 
-    KruskalsGraphOutput go = new KruskalsGraphOutput(mst);
+    GraphIntoWhateverFormatConverter go = new GraphIntoWhateverFormatConverter(mst);
     printToFile(go.getOutputAsGraphFormatOutput(), "kruskals.out.txt");
   }
   static private PrintStream makeFileStream(String fileName) throws FileNotFoundException {

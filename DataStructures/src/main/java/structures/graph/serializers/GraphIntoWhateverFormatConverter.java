@@ -1,12 +1,12 @@
-package algorithms.kruskals;
+package structures.graph.serializers;
 
 import structures.graph.Edge;
 import structures.graph.Graph;
 
-public class KruskalsGraphOutput {
+public class GraphIntoWhateverFormatConverter {
   Graph graph;
   String lineSeparator = System.lineSeparator();
-  public KruskalsGraphOutput(Graph graph) {
+  public GraphIntoWhateverFormatConverter(Graph graph) {
     this.graph = graph;
   }
   public String getOutputAsGraphFormatOutput() {

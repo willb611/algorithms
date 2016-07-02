@@ -1,4 +1,4 @@
-package algorithms.kruskals;
+package structures.graph.generation;
 
 import structures.graph.Edge;
 import structures.graph.Graph;
