@@ -3,7 +3,7 @@ package algorithms.kruskals;
 public class KruskalsGraphOutput {
   Graph graph;
   String lineSeparator = System.lineSeparator();
-  public KruskalsGraphOutput(Graph graph ) {
+  public KruskalsGraphOutput(Graph graph) {
     this.graph = graph;
   }
   public String getOutputAsGraphFormatOutput() {

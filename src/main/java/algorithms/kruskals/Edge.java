@@ -2,7 +2,7 @@ package algorithms.kruskals;
 
 class Edge implements Comparable<Edge>
 {
-  public int start, end, val;
+  final public int start, end, val;
   public Edge(int startParam, int endParam, int length) {
     start = startParam;
     end = endParam;
