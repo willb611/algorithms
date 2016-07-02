@@ -81,7 +81,7 @@ public class Kruskals
     }
     List<Edge> mst = new ArrayList<>(graph.getNodeNum() - 1);
     // Try all edges, in ascending order of edge weight
-    for(int i=0;i<arr.length;i++) {
+    for(int i = 0; i < arr.length; i++) {
       // if it doesnt form a cycle, add it
       if(forest[arr[i].start].findParent() != forest[arr[i].end].findParent()) {
         // Connect these two nodes.
@@ -92,9 +92,9 @@ public class Kruskals
     if (mst.size() != graph.getNodeNum() - 1) {
       throw new NullPointerException("Error, provided graph was not connected,  " + mst.size());
     }
-    Graph resultingTree = new Graph();
-    resultingTree.setNodeNum(graph.getNodeNum());
-    resultingTree.setEdges(mst.toArray(new Edge[mst.size()]));
-    return resultingTree;
+    Graph.Builder builder = new Graph.Builder();
+    builder.withNodeNum(graph.getNodeNum());
+    builder.withEdges(mst.toArray(new Edge[mst.size()]));
+    return builder.build();
   }
 }

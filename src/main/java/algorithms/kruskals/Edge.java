@@ -3,7 +3,7 @@ package algorithms.kruskals;
 class Edge implements Comparable<Edge>
 {
   public int start, end, val;
-  public Edge(int startParam, int endParam, int length) { // TODO should it be length ? Or generefied ?
+  public Edge(int startParam, int endParam, int length) {
     start = startParam;
     end = endParam;
     val = length;

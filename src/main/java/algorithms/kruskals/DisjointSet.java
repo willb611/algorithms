@@ -1,18 +1,21 @@
 package algorithms.kruskals;
 
 class DisjointSet {
-  DisjointSet parent;
-  int id;
-  public DisjointSet(int givenID) {
-    id = givenID;
+  private DisjointSet parent;
+  private int id;
+  public DisjointSet(int givenId) {
+    id = givenId;
     parent = this;
   }
-  DisjointSet findParent(){
+  public DisjointSet findParent(){
     if (parent == this) return this;
     else return parent.findParent();
   }
-  void union(DisjointSet other)
-  {
+  public void union(DisjointSet other) {
     other.parent = findParent();
+  }
+
+  public int getId() {
+    return id;
   }
 }
