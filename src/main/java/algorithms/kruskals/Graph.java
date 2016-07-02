@@ -65,8 +65,8 @@ public class Graph {
   private void setEdges(Edge[] edges) {
     this.edges = edges;
   }
-  @Override
-  public String toString() {
+
+  public String toStringWithEdgesSortedInAscendingOrder() {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("Graph with nodeNum: ").append(nodeNum).append(", edges: ").append(System.lineSeparator());
     Edge[] copy = new Edge[edges.length];

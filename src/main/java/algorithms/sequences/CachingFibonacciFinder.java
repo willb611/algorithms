@@ -23,7 +23,7 @@ public class CachingFibonacciFinder implements FibonacciFinder {
       return BigInteger.ONE;
     } else if (n > storedResults.length) {
       throw new IllegalArgumentException("Only saving values up to " + storedResults.length
-          + " but asked to solve for nth fibonacci number, n: " + n);
+          + " but asked to findMinimumSpanningTreeForGraph for nth fibonacci number, n: " + n);
     }
     int startIndex = 2;
     while (storedResults[startIndex] != null && startIndex < n) {

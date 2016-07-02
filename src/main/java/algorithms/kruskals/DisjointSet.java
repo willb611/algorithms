@@ -18,4 +18,11 @@ class DisjointSet {
   public int getId() {
     return id;
   }
+  public static DisjointSet[] makeUnconnectedForest(int size) {
+    DisjointSet[] forest = new DisjointSet[size];
+    for (int i = 0; i < size;i++) {
+      forest[i] = new DisjointSet(i);
+    }
+    return forest;
+  }
 }

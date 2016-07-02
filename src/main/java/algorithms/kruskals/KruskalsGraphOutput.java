@@ -6,7 +6,7 @@ public class KruskalsGraphOutput {
   public KruskalsGraphOutput(Graph graph ) {
     this.graph = graph;
   }
-  public String outputToGivenFile() {
+  public String getOutputAsGraphFormatOutput() {
     StringBuilder sb = new StringBuilder();
     sb.append("graph G {");
     sb.append(lineSeparator);
