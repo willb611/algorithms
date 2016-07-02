@@ -1,12 +1,14 @@
 package algorithms.kruskals;
 
+import structures.graph.Graph;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
 public class KruskalsTest {
   static String dataFile = "in.txt";
-  
+
   static void test() throws Exception {
     Graph graph = GraphGenerator.makeRandomTree();
     System.out.println(graph.toStringWithEdgesSortedInAscendingOrder());

@@ -1,5 +1,8 @@
 package algorithms.kruskals;
 
+import structures.graph.Edge;
+import structures.graph.Graph;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;

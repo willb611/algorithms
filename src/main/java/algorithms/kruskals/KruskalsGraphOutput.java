@@ -1,5 +1,8 @@
 package algorithms.kruskals;
 
+import structures.graph.Edge;
+import structures.graph.Graph;
+
 public class KruskalsGraphOutput {
   Graph graph;
   String lineSeparator = System.lineSeparator();

@@ -1,6 +1,6 @@
-package algorithms.kruskals;
+package structures;
 
-class DisjointSet {
+public class DisjointSet {
   private DisjointSet parent;
   private int id;
   public DisjointSet(int givenId) {

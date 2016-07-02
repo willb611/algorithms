@@ -1,12 +1,8 @@
-package algorithms.kruskals;
+package structures.graph;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 
-import static algorithms.internal.Preconditions.checkNotNull;
-import static java.lang.Integer.parseInt;
+import structures.internal.Preconditions;
 
 public class Graph {
   private int nodeNum;
@@ -41,6 +37,7 @@ public class Graph {
     }
     return stringBuilder.toString();
   }
+
   public static class Builder {
     Integer nodeNum;
     Edge[] edges;
@@ -54,10 +51,9 @@ public class Graph {
     }
     public Graph build() {
       Graph graph = new Graph();
-      graph.setEdges(checkNotNull(edges));
-      graph.setNodeNum(checkNotNull(nodeNum));
+      graph.setEdges(Preconditions.checkNotNull(edges));
+      graph.setNodeNum(Preconditions.checkNotNull(nodeNum));
       return graph;
     }
-
   }
 }

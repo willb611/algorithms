@@ -1,5 +1,8 @@
 package algorithms.kruskals;
 
+import structures.DisjointSet;
+import structures.graph.Edge;
+import structures.graph.Graph;
 
 import java.util.ArrayList;
 import java.util.Arrays;

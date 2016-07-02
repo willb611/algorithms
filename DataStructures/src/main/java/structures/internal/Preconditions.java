@@ -1,4 +1,4 @@
-package algorithms.internal;
+package structures.internal;
 
 public class Preconditions {
   public static <T> T checkNotNull(T object) {
