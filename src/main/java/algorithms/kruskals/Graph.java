@@ -13,42 +13,6 @@ public class Graph {
   private Edge[] edges;
   private Graph() {}
 
-  private static Queue<String> getLines(String fileName) throws IOException {
-    BufferedReader br = new BufferedReader(new FileReader(fileName));
-    Queue<String> lines = new ArrayDeque<>();
-    try {
-      while (br.ready()) {
-        lines.add(br.readLine());
-      }
-    } finally {
-      br.close();
-    }
-    return lines;
-  }
-
-  /**
-  * Data should be in a text file, see variable dataFile
-  * First line contains the number of nodes
-  * Rest of the lines contain edges:
-  * <p>start Node #, end Node #, length.</p>
-  */
-  static Graph parseData(String dataFile) throws Exception
-  {
-    Queue<String> lines = getLines(dataFile);
-    int nodeNum = parseInt(lines.poll());
-    List<Edge> list = new ArrayList<>();
-    while (!lines.isEmpty()) {
-      String[] info = lines.poll().split(" ");
-      int startNodeNum = parseInt(info[0]);
-      int endNodeNum = parseInt(info[1]);
-      int length = parseInt(info[2]);
-      Edge e = new Edge(startNodeNum, endNodeNum, length);
-      list.add(e);
-    }
-    Edge[] edges = list.toArray(new Edge[0]);
-    return new Builder().withEdges(edges).withNodeNum(nodeNum).build();
-  }
-
 
   public int getNodeNum() {
     return nodeNum;
