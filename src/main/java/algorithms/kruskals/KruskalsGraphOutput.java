@@ -1,17 +1,18 @@
 package algorithms.kruskals;
 
 public class KruskalsGraphOutput {
-  Edge[] graph;
+  Graph graph;
   String lineSeparator = System.lineSeparator();
-  public KruskalsGraphOutput(Edge[] data) {
-    graph = data;
+  public KruskalsGraphOutput(Graph graph ) {
+    this.graph = graph;
   }
-  String output() {
+  public String outputToGivenFile() {
     StringBuilder sb = new StringBuilder();
     sb.append("graph G {");
     sb.append(lineSeparator);
-    for (int i=0; i < graph.length; i++) {
-      Edge e = graph[i];
+    Edge[] arr = graph.getEdges();
+    for (int i=0; i < arr.length; i++) {
+      Edge e = arr[i];
       sb.append(String.format("%s -- %s [label=%d];\n",e.start, e.end, e.val));
     }
     sb.append("}");

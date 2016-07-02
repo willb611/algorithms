@@ -5,10 +5,9 @@ import java.io.*;
 // TODO clean up "solve" method, eliminate single line comments
 public class Kruskals
 {
-  String dataFile = "in.txt";
+  static String dataFile = "in.txt";
   int MAX_VALUE = 150;
   int MIN_VALUE = 50;
-  int globNodeNum;
   // Builds a random tree
   void makeRandomData() throws Exception
   {
@@ -43,28 +42,20 @@ public class Kruskals
     ps.flush();
     ps.close();
   }
-  int i(String s) throws Exception
-  {
-    return Integer.parseInt(s);
-  }
   static void test() throws Exception
   {
     Kruskals ks = new Kruskals();
     ks.makeRandomData();
-    Edge[] data = ks.parseData();
-    System.out.println("Printing generated data");
-    Arrays.sort(data);
-    for(int i=0; i<data.length;i++) {
-      System.out.println(data[i]);
-    }
+    Graph graph = Graph.parseData(dataFile);
+    System.out.println(graph);
     System.out.println("Attempting to solve");
-    Edge[] mst = ks.solve(data);
+
+    Graph mst = ks.solve(graph);
     System.out.println("Printing mst");
-    for(int i=0; i<mst.length;i++) {
-      System.out.println(mst[i]);
-    }
+    System.out.println(mst);
+
     KruskalsGraphOutput go = new KruskalsGraphOutput(mst);
-    String result = go.output();
+    String result = go.outputToGivenFile();
     PrintStream outputStream = makeFileStream("kruskals.out.txt");
     try {
       outputStream.print(result);
@@ -77,37 +68,18 @@ public class Kruskals
     File outputFile = new File(outputFileName);
     return new PrintStream(outputFile);
   }
-  /**
-  * Data should be in a text file, see variable dataFile
-  * First line contains the number of nodes
-  * Rest of the lines contain edges:
-  * <p>start Node #, end Node #, length.</p>
-  */
-  Edge[] parseData() throws Exception
-  {
-    BufferedReader br = new BufferedReader(new FileReader(dataFile));
-    int nodeNum = Integer.parseInt(br.readLine());
-    NODE_NUM = nodeNum;
-    List<Edge> list = new ArrayList<Edge>();
-    while (br.ready()) {
-      String[] info = br.readLine().split(" ");
-      Edge e = new Edge(i(info[0]),i(info[1]),i(info[2])); // TODO what even
-      list.add(e);
-    }
-    br.close();
-    return list.toArray(new Edge[0]);
-  }
-  int NODE_NUM;
+
   /**
   * Solves using a list and disjoint set trees
   */
-  Edge[] solve(Edge[] arr) {
+  Graph solve(Graph graph) {
+    Edge[] arr = graph.getEdges();
     Arrays.sort(arr);
-    DisjointSet[] forest = new DisjointSet[NODE_NUM + 1];
+    DisjointSet[] forest = new DisjointSet[graph.getNodeNum() + 1];
     for (int i=0;i<forest.length;i++) {
       forest[i] = new DisjointSet(i);
     }
-    List<Edge> mst = new ArrayList<>(NODE_NUM-1);
+    List<Edge> mst = new ArrayList<>(graph.getNodeNum() - 1);
     // Try all edges, in ascending order of edge weight
     for(int i=0;i<arr.length;i++) {
       // if it doesnt form a cycle, add it
@@ -117,9 +89,12 @@ public class Kruskals
         mst.add(arr[i]);
       }
     }
-    if (mst.size() != NODE_NUM-1) {
+    if (mst.size() != graph.getNodeNum() - 1) {
       throw new NullPointerException("Error, provided graph was not connected,  " + mst.size());
     }
-    return mst.toArray(new Edge[mst.size()]);
+    Graph resultingTree = new Graph();
+    resultingTree.setNodeNum(graph.getNodeNum());
+    resultingTree.setEdges(mst.toArray(new Edge[mst.size()]));
+    return resultingTree;
   }
 }
