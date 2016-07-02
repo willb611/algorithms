@@ -5,27 +5,6 @@ import java.io.*;
 // TODO clean up "solve" method, eliminate single line comments
 public class Kruskals
 {
-  class Edge implements Comparable<Edge> // TODO extracted into own class ?
-  {
-    public int start, end, val;
-    public Edge(int startParam, int endParam, int length) { // TODO should it be length ? Or generefied ?
-      start = startParam;
-      end = endParam;
-      val = length;
-    }
-    public String toString(){return "start: " + start + " end: " + end + " val: " + val;}
-    public int compareTo(Edge o) 
-    {
-      return this.val - o.val;
-    }
-  }
-  class Node
-  {
-    int tag;
-    public Node(int tagParam) { // TODO also extract this ? 
-      tag = tagParam;
-    }
-  }
   String dataFile = "in.txt";
   int MAX_VALUE = 150;
   int MIN_VALUE = 50;
@@ -128,7 +107,7 @@ public class Kruskals
     for (int i=0;i<forest.length;i++) {
       forest[i] = new DisjointSet(i);
     }
-    List<Edge> mst = new ArrayList<Edge>(NODE_NUM-1);
+    List<Edge> mst = new ArrayList<>(NODE_NUM-1);
     // Try all edges, in ascending order of edge weight
     for(int i=0;i<arr.length;i++) {
       // if it doesnt form a cycle, add it
@@ -138,7 +117,9 @@ public class Kruskals
         mst.add(arr[i]);
       }
     }
-    if (mst.size() != NODE_NUM-1) throw new NullPointerException("Error, need moar edges,  " + mst.size());
+    if (mst.size() != NODE_NUM-1) {
+      throw new NullPointerException("Error, provided graph was not connected,  " + mst.size());
+    }
     return mst.toArray(new Edge[mst.size()]);
   }
 }
