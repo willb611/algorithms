@@ -19,6 +19,7 @@ public class GraphSerializer {
   public static void printToFile(Graph graph, File file) throws FileNotFoundException {
     printToStreamAndClose(graph, new PrintStream(file));
   }
+
   public static void printToFile(Graph graph, String fileName) throws FileNotFoundException {
     printToFile(graph, new File(fileName));
   }

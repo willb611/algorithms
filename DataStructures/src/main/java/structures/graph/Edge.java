@@ -8,11 +8,12 @@ public class Edge implements Comparable<Edge> {
     end = endParam;
     val = length;
   }
-  public String toString(){
+
+  public String toString() {
     return "start: " + start + " end: " + end + " val: " + val;
   }
 
-  public int compareTo(Edge o) {
-    return this.val - o.val;
+  public int compareTo(Edge other) {
+    return this.val - other.val;
   }
 }
