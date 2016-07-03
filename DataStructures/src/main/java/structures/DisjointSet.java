@@ -18,7 +18,8 @@ public class DisjointSet {
   }
 
   public void union(DisjointSet other) {
-    other.parent = findParent();
+    DisjointSet otherParent = other.findParent();
+    otherParent.parent = findParent();
   }
 
   public int getId() {
