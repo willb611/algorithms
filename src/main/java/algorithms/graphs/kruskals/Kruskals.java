@@ -1,4 +1,4 @@
-package algorithms.kruskals;
+package algorithms.graphs.kruskals;
 
 import structures.DisjointSet;
 import structures.graph.Edge;

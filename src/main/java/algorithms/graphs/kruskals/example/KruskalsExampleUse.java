@@ -1,6 +1,6 @@
-package algorithms.kruskals.example;
+package algorithms.graphs.kruskals.example;
 
-import algorithms.kruskals.Kruskals;
+import algorithms.graphs.kruskals.Kruskals;
 import structures.graph.Graph;
 import structures.graph.generation.GraphGenerator;
 import structures.graph.serializers.GraphIntoDotFormatConverter;
