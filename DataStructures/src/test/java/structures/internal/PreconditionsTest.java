@@ -1,8 +1,8 @@
-package algorithms;
+package structures.internal;
 
 import org.junit.Test;
 
-import static algorithms.Preconditions.checkNotNull;
+import static structures.internal.Preconditions.checkNotNull;
 
 public class PreconditionsTest {
 
