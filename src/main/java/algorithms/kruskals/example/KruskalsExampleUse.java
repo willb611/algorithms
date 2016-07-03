@@ -1,5 +1,6 @@
-package algorithms.kruskals;
+package algorithms.kruskals.example;
 
+import algorithms.kruskals.Kruskals;
 import structures.graph.Graph;
 import structures.graph.generation.GraphGenerator;
 import structures.graph.serializers.GraphIntoDotFormatConverter;
@@ -8,7 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
-public class KruskalsTest {
+public class KruskalsExampleUse {
   static String dataFile = "in.txt";
 
   static void test() throws Exception {
