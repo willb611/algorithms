@@ -3,15 +3,15 @@ package structures.graph.serializers;
 import structures.graph.Edge;
 import structures.graph.Graph;
 
-public class GraphIntoWhateverFormatConverter {
-  Graph graph;
-  String lineSeparator = System.lineSeparator();
+public class GraphIntoDotFormatConverter {
+  private Graph graph;
+  private String lineSeparator = System.lineSeparator();
 
-  public GraphIntoWhateverFormatConverter(Graph graph) {
+  public GraphIntoDotFormatConverter(Graph graph) {
     this.graph = graph;
   }
 
-  public String getOutputAsGraphFormatOutput() {
+  public String getOutputAsDotFormat() {
     StringBuilder sb = new StringBuilder();
     sb.append("graph G {");
     sb.append(lineSeparator);

@@ -16,7 +16,7 @@ public class GraphGenerator {
 
   private static int NUMBER_OF_EDGES_JOINING_RANDOM_NODES_TO_CREATE = 7;
 
-  public static Graph makeRandomTree() throws Exception {
+  public static Graph makeRandomConnectedGraph() throws Exception {
     Random random = new Random();
     int nodeNum = getNumberOfNodes(random);
     List<Integer> unconnected = new ArrayList<>();
