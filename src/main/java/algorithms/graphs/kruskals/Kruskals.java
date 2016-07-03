@@ -11,7 +11,7 @@ public class Kruskals {
   * Solves using a list and disjoint set trees
   */
   public Graph findMinimumSpanningTreeForGraph(Graph graph) {
-    SortedSet<Edge> sortedEdges = new TreeSet<>(Arrays.asList(graph.getEdges()));
+    SortedSet<Edge> sortedEdges = new TreeSet<>(graph.getEdgesAsList());
     final int numberOfEdgesNeededForMst = graph.getNodeNum() - 1;
     DisjointSet[] forest = DisjointSet.makeUnconnectedForest(graph.getNodeNum() + 1);
     List<Edge> edgesInMst = new ArrayList<>(numberOfEdgesNeededForMst);

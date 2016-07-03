@@ -4,6 +4,7 @@ import structures.internal.Preconditions;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public class Graph {
   private int nodeNum;
@@ -20,6 +21,10 @@ public class Graph {
 
   public Edge[] getEdges() {
     return edges;
+  }
+
+  public List<Edge> getEdgesAsList() {
+    return Arrays.asList(getEdges());
   }
 
   private void setEdges(Edge[] edges) {
