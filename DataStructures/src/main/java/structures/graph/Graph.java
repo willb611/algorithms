@@ -3,6 +3,7 @@ package structures.graph;
 import structures.internal.Preconditions;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 public class Graph {
   private int nodeNum;
@@ -44,6 +45,11 @@ public class Graph {
 
     public Builder withEdges(Edge[] edges) {
       this.edges = edges;
+      return this;
+    }
+
+    public Builder withEdges(Collection<Edge> edges) {
+      this.edges = edges.toArray(new Edge[edges.size()]);
       return this;
     }
 

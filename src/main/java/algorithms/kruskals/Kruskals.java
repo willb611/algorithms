@@ -14,23 +14,23 @@ public class Kruskals {
     SortedSet<Edge> sortedEdges = new TreeSet<>(Arrays.asList(graph.getEdges()));
     final int numberOfEdgesNeededForMst = graph.getNodeNum() - 1;
     DisjointSet[] forest = DisjointSet.makeUnconnectedForest(graph.getNodeNum() + 1);
-    List<Edge> mst = new ArrayList<>(numberOfEdgesNeededForMst);
+    List<Edge> edgesInMst = new ArrayList<>(numberOfEdgesNeededForMst);
 
     for (Edge edge : sortedEdges) {
       DisjointSet source = forest[edge.start];
       DisjointSet target = forest[edge.end];
       if (source.findParent() != target.findParent()) {
         source.union(target);
-        mst.add(edge);
+        edgesInMst.add(edge);
       }
     }
-    if (mst.size() != numberOfEdgesNeededForMst) {
+    if (edgesInMst.size() != numberOfEdgesNeededForMst) {
       throw new IllegalArgumentException("Error, provided graph was not connected. Only produced tree " +
-          "of size: " + mst.size());
+          "of size: " + edgesInMst.size());
     }
     Graph.Builder builder = new Graph.Builder();
     builder.withNodeNum(graph.getNodeNum());
-    builder.withEdges(mst.toArray(new Edge[mst.size()]));
+    builder.withEdges(edgesInMst);
     return builder.build();
   }
 }
