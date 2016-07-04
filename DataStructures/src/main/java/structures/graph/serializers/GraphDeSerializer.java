@@ -15,7 +15,7 @@ import static java.lang.Integer.parseInt;
  * Data should be in a text file
  * First line contains the number of nodes
  * Rest of the lines contain edges:
- * <p>start Node #, end Node #, length.</p>
+ * <p>source Node #, end Node #, length.</p>
  */
 public class GraphDeSerializer {
   public static Graph fromFileName(String fileName) throws IOException {

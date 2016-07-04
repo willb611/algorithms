@@ -9,6 +9,7 @@ import java.util.List;
 public class Graph {
   private int nodeNum;
   private Edge[] edges;
+  private int totalWeight;
   private Graph() {}
 
   public int getNodeNum() {
@@ -44,9 +45,18 @@ public class Graph {
     return stringBuilder.toString();
   }
 
+  private void setTotalWeight(int totalWeight) {
+    this.totalWeight = totalWeight;
+  }
+
+  public int getTotalWeight() {
+    return totalWeight;
+  }
+
   public static class Builder {
     Integer nodeNum;
     Edge[] edges;
+    Integer totalWeight;
 
     public Builder withEdges(Edge[] edges) {
       this.edges = edges;
@@ -67,6 +77,10 @@ public class Graph {
       Graph graph = new Graph();
       graph.setEdges(Preconditions.checkNotNull(edges));
       graph.setNodeNum(Preconditions.checkNotNull(nodeNum));
+      if (totalWeight == null) {
+        totalWeight = graph.getEdgesAsList().stream().mapToInt(Edge::getLength).sum();
+      }
+      graph.setTotalWeight(totalWeight);
       return graph;
     }
   }

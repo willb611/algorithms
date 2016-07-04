@@ -61,12 +61,12 @@ public class GraphGenerator {
 
   private static void updateConnectivityWithEdge(List<Integer> connected, List<Integer> unconnected,
                                                  Edge edge) {
-    if (connected.contains(edge.start) && !connected.contains(edge.end)) {
-      unconnected.remove(edge.end);
-      connected.add(edge.start);
-    } else if (connected.contains(edge.end) && !connected.contains(edge.start)) {
-      unconnected.remove(edge.start);
-      connected.remove(edge.end);
+    if (connected.contains(edge.getSource()) && !connected.contains(edge.getEnd())) {
+      unconnected.remove(edge.getEnd());
+      connected.add(edge.getSource());
+    } else if (connected.contains(edge.getEnd()) && !connected.contains(edge.getSource())) {
+      unconnected.remove(edge.getSource());
+      connected.remove(edge.getEnd());
     }
   }
 

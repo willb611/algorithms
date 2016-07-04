@@ -16,15 +16,15 @@ public class Prims {
 
     DisjointSetTrackingChildren root = unconnectedForest.values().stream().findFirst().get();
     while (!unconnectedForest.isEmpty()) {
-      SortedSet<Edge> edgesToConsider = getEdgesFromDisjointSet(graph.getEdges(), root.getChildren());
+      SortedSet<Edge> edgesToConsider = getEdgesConnectedToOneDisjointSet(graph.getEdges(), root.getChildren());
       if (edgesToConsider.isEmpty()) {
         throw new IllegalArgumentException("Given graph was not connected");
       } else {
         Edge edge = edgesToConsider.first();
-        if (edge.start == root.getId()) {
-          root.union(unconnectedForest.remove(edge.end));
+        if (edge.getSource() == root.getId()) {
+          root.union(unconnectedForest.remove(edge.getEnd()));
         } else {
-          root.union(unconnectedForest.remove(edge.start));
+          root.union(unconnectedForest.remove(edge.getSource()));
         }
       }
     }
@@ -43,21 +43,21 @@ public class Prims {
     return disjointSetForest;
   }
 
-  private SortedSet<Edge> getEdgesFromDisjointSet(Edge[] edges, Collection<DisjointSet> included) {
+  private SortedSet<Edge> getEdgesConnectedToOneDisjointSet(Edge[] edges, Collection<DisjointSet> included) {
     List<Integer> integerList = included.stream().map(DisjointSet::getId).collect(Collectors.toList());
-    return getEdges(edges, integerList);
+    return getEdgesConnectedToOneIncludedNode(edges, integerList);
   }
 
-  private SortedSet<Edge> getEdges(Edge[] edges, Collection<Integer> included) {
+  private SortedSet<Edge> getEdgesConnectedToOneIncludedNode(Edge[] edges, Collection<Integer> included) {
     SortedSet<Edge> sorted = new TreeSet<>();
     for (Edge edge : edges) {
-      if (included.contains(edge.start)) {
-        if (included.contains(edge.end)) {
+      if (included.contains(edge.getSource())) {
+        if (included.contains(edge.getEnd())) {
           // adding would form a cycle,
         } else {
           sorted.add(edge);
         }
-      } else if (included.contains(edge.end)) {
+      } else if (included.contains(edge.getEnd())) {
         sorted.add(edge);
       }
     }
