@@ -8,15 +8,33 @@ import java.util.List;
 import java.util.Random;
 
 public class GraphGenerator {
-  private static int LENGTH_GENERATED_MAX_VALUE = 150;
-  private static int LENGTH_GENERATED_MIN_VALUE = 50;
+  private static int DEFAULT_LENGTH_GENERATED_MAX_VALUE = 150;
+  private static int DEFAULT_LENGTH_GENERATED_MIN_VALUE = 50;
 
-  private static int NODE_NUMBER_MAX_VALUE = 15;
-  private static int NODE_NUMBER_MIN_VALUE = 5;
+  private static int DEFAULT_NODE_NUMBER_MAX_VALUE = 15;
+  private static int DEFAULT_NODE_NUMBER_MIN_VALUE = 5;
 
   private static int NUMBER_OF_EDGES_JOINING_RANDOM_NODES_TO_CREATE = 7;
 
-  public static Graph makeRandomConnectedGraph() throws Exception {
+  final private int lengthGeneratedMaxValue;
+  final private int lengthGeneratedMinValue;
+
+  final private int nodeNumMax;
+  final private int nodeNumMin;
+
+  public GraphGenerator(int maxLengthGenerated, int minLengthGenerated,
+                        int maxNodeNum, int minNodeNum) {
+    lengthGeneratedMaxValue = maxLengthGenerated;
+    lengthGeneratedMinValue = minLengthGenerated;
+    nodeNumMax = maxNodeNum;
+    nodeNumMin = minNodeNum;
+  }
+  public GraphGenerator() {
+    this(DEFAULT_LENGTH_GENERATED_MAX_VALUE, DEFAULT_LENGTH_GENERATED_MIN_VALUE,
+        DEFAULT_NODE_NUMBER_MAX_VALUE, DEFAULT_NODE_NUMBER_MIN_VALUE);
+  }
+
+  public Graph makeRandomConnectedGraph() throws Exception {
     Random random = new Random();
     int nodeNum = getNumberOfNodes(random);
     List<Integer> unconnected = new ArrayList<>();
@@ -34,11 +52,11 @@ public class GraphGenerator {
         .build();
   }
 
-  private static int getNumberOfNodes(Random random) {
-    return random.nextInt(NODE_NUMBER_MAX_VALUE - NODE_NUMBER_MIN_VALUE) + NODE_NUMBER_MIN_VALUE;
+  private int getNumberOfNodes(Random random) {
+    return random.nextInt(nodeNumMax - nodeNumMin) + nodeNumMin;
   }
 
-  private static List<Edge> generateRandomEdges(Random random,
+  private List<Edge> generateRandomEdges(Random random,
                                                 List<Integer> connected, List<Integer> unconnected,
                                                 int nodeNum) {
     if (nodeNum <= 2) {
@@ -59,7 +77,7 @@ public class GraphGenerator {
     return edges;
   }
 
-  private static void updateConnectivityWithEdge(List<Integer> connected, List<Integer> unconnected,
+  private void updateConnectivityWithEdge(List<Integer> connected, List<Integer> unconnected,
                                                  Edge edge) {
     if (connected.contains(edge.getSource()) && !connected.contains(edge.getEnd())) {
       unconnected.remove(edge.getEnd());
@@ -71,7 +89,7 @@ public class GraphGenerator {
   }
 
 
-  private static List<Edge> ensureConnected(Random random,
+  private List<Edge> ensureConnected(Random random,
                                             List<Integer> unconnected, List<Integer> connected) {
     List<Edge> edges = new ArrayList<>();
     while (!unconnected.isEmpty()) {
@@ -85,8 +103,8 @@ public class GraphGenerator {
     return edges;
   }
 
-  private static int getRandomLength(Random random) {
-    return random.nextInt(LENGTH_GENERATED_MAX_VALUE - LENGTH_GENERATED_MIN_VALUE)
-        + LENGTH_GENERATED_MIN_VALUE;
+  private int getRandomLength(Random random) {
+    return random.nextInt(lengthGeneratedMaxValue - lengthGeneratedMinValue)
+        + lengthGeneratedMinValue;
   }
 }

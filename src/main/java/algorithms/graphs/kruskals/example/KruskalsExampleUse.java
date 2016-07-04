@@ -13,7 +13,7 @@ public class KruskalsExampleUse {
   static String dataFile = "in.txt";
 
   static void test() throws Exception {
-    Graph graph = GraphGenerator.makeRandomConnectedGraph();
+    Graph graph = new GraphGenerator().makeRandomConnectedGraph();
     System.out.println(graph.toStringWithEdgesSortedInAscendingOrder());
     System.out.println("Attempting to findMinimumSpanningTreeForGraph");
 
