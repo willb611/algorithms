@@ -43,7 +43,7 @@ public class GraphGenerator {
       unconnected.add(i);
     }
 
-    List<Edge> edgesCreated = generateRandomEdges(random, connected, unconnected, nodeNum);
+    List<Edge> edgesCreated = generateRandomEdgesAndUpdateConnectedLists(random, connected, unconnected, nodeNum);
     edgesCreated.addAll(ensureConnected(random, unconnected, connected));
 
     return new Graph.Builder()
@@ -56,9 +56,9 @@ public class GraphGenerator {
     return random.nextInt(nodeNumMax - nodeNumMin) + nodeNumMin;
   }
 
-  private List<Edge> generateRandomEdges(Random random,
-                                                List<Integer> connected, List<Integer> unconnected,
-                                                int nodeNum) {
+  private List<Edge> generateRandomEdgesAndUpdateConnectedLists(Random random,
+                                                                List<Integer> connected, List<Integer> unconnected,
+                                                                int nodeNum) {
     if (nodeNum <= 2) {
       throw new IllegalArgumentException("Node number must be more than 2");
     }
