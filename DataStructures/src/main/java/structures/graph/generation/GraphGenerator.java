@@ -42,6 +42,10 @@ public class GraphGenerator {
     for (int i = 1; i <= nodeNum; i++) {
       unconnected.add(i);
     }
+    // Connect 1 node
+    int root = getRandomNode(random, nodeNum);
+    connected.add(root);
+    unconnected.remove(new Integer(root));
 
     List<Edge> edgesCreated = generateRandomEdgesAndUpdateConnectedLists(random, connected, unconnected, nodeNum);
     edgesCreated.addAll(ensureConnected(random, unconnected, connected));
@@ -64,10 +68,10 @@ public class GraphGenerator {
     }
     List<Edge> edges = new ArrayList<>();
     for (int i = 0; i < NUMBER_OF_EDGES_JOINING_RANDOM_NODES_TO_CREATE; i++) {
-      int start = random.nextInt(nodeNum) + 1;
-      int end = random.nextInt(nodeNum) + 1;
+      int start = getRandomNode(random, nodeNum);
+      int end = getRandomNode(random, nodeNum);
       while (start == end) {
-        end = random.nextInt(nodeNum) + 1;
+        end = getRandomNode(random, nodeNum);
       }
       int length = getRandomLength(random);
       Edge edge = new Edge(start, end, length);
@@ -80,11 +84,11 @@ public class GraphGenerator {
   private void updateConnectivityWithEdge(List<Integer> connected, List<Integer> unconnected,
                                                  Edge edge) {
     if (connected.contains(edge.getSource()) && !connected.contains(edge.getEnd())) {
-      unconnected.remove(edge.getEnd());
+      unconnected.remove(new Integer(edge.getEnd()));
       connected.add(edge.getSource());
     } else if (connected.contains(edge.getEnd()) && !connected.contains(edge.getSource())) {
-      unconnected.remove(edge.getSource());
-      connected.remove(edge.getEnd());
+      unconnected.remove(new Integer(edge.getSource()));
+      connected.remove(new Integer(edge.getEnd()));
     }
   }
 
@@ -106,5 +110,9 @@ public class GraphGenerator {
   private int getRandomLength(Random random) {
     return random.nextInt(lengthGeneratedMaxValue - lengthGeneratedMinValue)
         + lengthGeneratedMinValue;
+  }
+
+  private int getRandomNode(Random random, int nodeNum) {
+      return random.nextInt(nodeNum) + 1;
   }
 }

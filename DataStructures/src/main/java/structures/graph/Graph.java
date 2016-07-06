@@ -32,9 +32,15 @@ public class Graph {
     this.edges = edges;
   }
 
+  @Override
+  public String toString() {
+    return toStringWithEdgesSortedInAscendingOrder();
+  }
+
   public String toStringWithEdgesSortedInAscendingOrder() {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("Graph with nodeNum: ").append(nodeNum)
+        .append("number of edges: ").append(edges.length).append(System.lineSeparator())
         .append(", edges: ").append(System.lineSeparator());
     Edge[] copy = new Edge[edges.length];
     System.arraycopy(edges, 0, copy, 0, edges.length);

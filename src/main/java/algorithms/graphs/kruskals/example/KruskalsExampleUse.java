@@ -12,10 +12,16 @@ import java.io.PrintStream;
 public class KruskalsExampleUse {
   static String dataFile = "in.txt";
 
+  public static void main(String[] ags) throws Exception {
+    test();
+  }
+
   static void test() throws Exception {
     Graph graph = new GraphGenerator().makeRandomConnectedGraph();
     System.out.println(graph.toStringWithEdgesSortedInAscendingOrder());
     System.out.println("Attempting to findMinimumSpanningTreeForGraph");
+    GraphIntoDotFormatConverter connectedGraph = new GraphIntoDotFormatConverter(graph);
+    printToFile(connectedGraph.getOutputAsDotFormat(), "generated.out.dot");
 
     Kruskals ks = new Kruskals();
     Graph mst = ks.findMinimumSpanningTreeForGraph(graph);
