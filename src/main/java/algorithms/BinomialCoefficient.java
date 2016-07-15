@@ -1,6 +1,7 @@
 package algorithms;
 
-public class Permutations {
+public class BinomialCoefficient {
+
   public static int nChooseK(int n, int k)  {
     if (n < 1) {
       throw new IllegalArgumentException("N must be greater than 1, given n: " + n);
