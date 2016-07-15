@@ -21,7 +21,7 @@ public class Permutations {
   }
 
   private static int factorial(int i) {
-    int sum = i;
+    int sum = 1;
     while (i > 0) {
       sum *= i;
       i--;
@@ -31,7 +31,7 @@ public class Permutations {
 
   private static int numerator(int n, int k) {
     int res = 1;
-    for (int i =n ; i > n - k; i--) {
+    for (int i = n ; i > n - k; i--) {
       res *= i;
     }
     return res;
