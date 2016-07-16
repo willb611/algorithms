@@ -99,14 +99,12 @@ public class LinkedList<T extends Comparable<T>> {
     }
 
     public T next() {
-      if (curr == null) {
-        if (!haveStarted) { 
-          curr = start;
-          haveStarted = true;
-          return curr == null ? null : curr.data;
-        } else return null;
+      if (curr != null) {
+        curr = curr.next;
+      } else if (!haveStarted) {
+        curr = start;
+        haveStarted = true;
       }
-      curr = curr.next;
       return curr == null ? null : curr.data;
     }
   }
