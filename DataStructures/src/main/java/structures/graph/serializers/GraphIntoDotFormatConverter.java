@@ -18,7 +18,7 @@ public class GraphIntoDotFormatConverter {
     Edge[] arr = graph.getEdges();
     for (int i = 0; i < arr.length; i++) {
       Edge e = arr[i];
-      sb.append(String.format("%s -- %s [label=%d];\n", e.getSource(), e.getEnd(), e.getLength()));
+      sb.append(String.format("%s -- %s [label=%d];\n", e.getSource(), e.getDestination(), e.getLength()));
     }
     sb.append("}");
     sb.append(lineSeparator);

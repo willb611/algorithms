@@ -22,7 +22,7 @@ public class Prims {
       } else {
         Edge edge = edgesToConsider.first();
         if (edge.getSource() == root.getId()) {
-          root.union(unconnectedForest.remove(edge.getEnd()));
+          root.union(unconnectedForest.remove(edge.getDestination()));
         } else {
           root.union(unconnectedForest.remove(edge.getSource()));
         }
@@ -52,12 +52,12 @@ public class Prims {
     SortedSet<Edge> sorted = new TreeSet<>();
     for (Edge edge : edges) {
       if (included.contains(edge.getSource())) {
-        if (included.contains(edge.getEnd())) {
+        if (included.contains(edge.getDestination())) {
           // adding would form a cycle,
         } else {
           sorted.add(edge);
         }
-      } else if (included.contains(edge.getEnd())) {
+      } else if (included.contains(edge.getDestination())) {
         sorted.add(edge);
       }
     }

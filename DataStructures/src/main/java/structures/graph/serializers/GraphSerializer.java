@@ -37,6 +37,6 @@ public class GraphSerializer {
   }
 
   private static void printEdgeToStream(PrintStream printStream, Edge edge) {
-    printStream.printf("%d %d %d\n", edge.getSource(), edge.getEnd(), edge.getLength());
+    printStream.printf("%d %d %d\n", edge.getSource(), edge.getDestination(), edge.getLength());
   }
 }

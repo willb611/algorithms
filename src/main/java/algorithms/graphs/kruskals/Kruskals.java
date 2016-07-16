@@ -18,7 +18,7 @@ public class Kruskals {
 
     for (Edge edge : sortedEdges) {
       DisjointSet source = forest[edge.getSource()];
-      DisjointSet target = forest[edge.getEnd()];
+      DisjointSet target = forest[edge.getDestination()];
       if (source.findParent() != target.findParent()) {
         source.union(target);
         edgesInMst.add(edge);

@@ -2,12 +2,12 @@ package structures.graph;
 
 public class Edge implements Comparable<Edge> {
   private final int source;
-  private final int end;
+  private final int destination;
   private final int length;
 
   public Edge(int startParam, int endParam, int length) {
     source = startParam;
-    end = endParam;
+    destination = endParam;
     this.length = length;
   }
 
@@ -16,7 +16,7 @@ public class Edge implements Comparable<Edge> {
   }
 
   public String toString() {
-    return "source: " + getSource() + " end: " + getEnd() + " length: " + getLength();
+    return "source: " + getSource() + " destination: " + getDestination() + " length: " + getLength();
   }
 
   public int compareTo(Edge other) {
@@ -27,7 +27,7 @@ public class Edge implements Comparable<Edge> {
     return source;
   }
 
-  public int getEnd() {
-    return end;
+  public int getDestination() {
+    return destination;
   }
 }
