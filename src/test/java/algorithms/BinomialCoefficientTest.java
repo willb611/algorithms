@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class BinomialCoefficientTest
-{
+public class BinomialCoefficientTest {
+
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeN() {
     BinomialCoefficient.nChooseK(-1, 2);

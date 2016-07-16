@@ -21,6 +21,6 @@ allprojects {
     }
 }
 
-//dependencies {
-//    //compile project(":DataStructures")
-//}
+dependencies {
+    compile project(":DataStructures")
+}

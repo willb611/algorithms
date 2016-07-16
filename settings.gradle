@@ -4,4 +4,4 @@
  */
 rootProject.name = 'algorithms'
 
-//include "DataStructures"
+include "DataStructures"
