@@ -1,6 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
-import todo.LinkedList;
+import structures.LinkedList;
 
 import static org.junit.Assert.*;
 

@@ -1,3 +1,5 @@
+package structures;
+
 import java.util.Iterator;
 
 public class LinkedList<T extends Comparable<T>> {
@@ -9,27 +11,29 @@ public class LinkedList<T extends Comparable<T>> {
   }
 
   public boolean contains(T needle) {
-    Node<T> n = start;
-    while (n != null) {
-      if (n.data.equals(needle)) return true;
-      n = n.next;
+    Node<T> pointer = start;
+    while (pointer != null) {
+      if (pointer.data.equals(needle)) return true;
+      pointer = pointer.next;
     }
     return false;
   }
 
   public T poll() {
-    Node<T> res = first();
-    if (res == null) {
+    Node<T> firstElement = first();
+    if (firstElement == null) {
       return null;
     }
-    start = res.next;
+    start = firstElement.next;
     elementCount--;
-    return res.data;
+    return firstElement.data;
   }
 
   public T peek() {
     Node<T> res = first();
-    if (res == null) return null;
+    if (res == null) {
+      return null;
+    }
     return first().data;
   }
 
@@ -55,11 +59,11 @@ public class LinkedList<T extends Comparable<T>> {
     if (data == null) {
       throw new NullPointerException("Data cannot be null!");
     }
-    Node<T> n = new Node<>(data);
+    Node<T> newNode = new Node<>(data);
     if (start == null) {
-      start = n;
+      start = newNode;
     } else {
-      last().next = n;
+      last().next = newNode;
     }
     elementCount++;
   }
@@ -68,7 +72,7 @@ public class LinkedList<T extends Comparable<T>> {
     return elementCount;
   }
 
-  public class Node <T extends Comparable<T>> {
+  private class Node <T extends Comparable<T>> {
     public Node<T> next = null;
     public T data;
 
@@ -77,13 +81,13 @@ public class LinkedList<T extends Comparable<T>> {
     }
   }
 
-  public class MyIterator implements Iterator<T> {
+  private class MyIterator implements Iterator<T> {
     Node<T> curr = null;
     LinkedList<T> backing = null;
     boolean haveStarted = false;
 
-    public MyIterator(LinkedList<T> l){
-      backing = l;
+    public MyIterator(LinkedList<T> backingList){
+      backing = backingList;
     }
 
     public boolean hasNext() {
