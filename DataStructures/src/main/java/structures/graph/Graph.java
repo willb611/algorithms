@@ -60,9 +60,9 @@ public class Graph {
   }
 
   public static class Builder {
-    Integer nodeNum;
-    Edge[] edges;
-    Integer totalWeight;
+    private Integer nodeNum;
+    private Edge[] edges;
+    private Integer totalWeight;
 
     public Builder withEdges(Edge[] edges) {
       this.edges = edges;

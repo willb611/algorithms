@@ -10,32 +10,31 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
 public class KruskalsExampleUse {
-  static String dataFile = "in.txt";
 
   public static void main(String[] ags) throws Exception {
     test();
   }
 
   static void test() throws Exception {
-    Graph graph = new GraphGenerator().makeRandomConnectedGraph();
-    System.out.println(graph.toStringWithEdgesSortedInAscendingOrder());
+    Graph randomConnectedGraph = new GraphGenerator().makeRandomConnectedGraph();
+    System.out.println(randomConnectedGraph.toStringWithEdgesSortedInAscendingOrder());
     System.out.println("Attempting to findMinimumSpanningTreeForGraph");
-    GraphIntoDotFormatConverter connectedGraph = new GraphIntoDotFormatConverter(graph);
-    printToFile(connectedGraph.getOutputAsDotFormat(), "generated.out.dot");
+    GraphIntoDotFormatConverter dotFormatConverter = new GraphIntoDotFormatConverter();
+    printToFile(dotFormatConverter.getOutputAsDotFormat(randomConnectedGraph), "generated.out.dot");
 
     Kruskals ks = new Kruskals();
-    Graph mst = ks.findMinimumSpanningTreeForGraph(graph);
+    Graph mst = ks.findMinimumSpanningTreeForGraph(randomConnectedGraph);
     System.out.println("Printing mst");
     System.out.println(mst);
 
-    GraphIntoDotFormatConverter go = new GraphIntoDotFormatConverter(mst);
-    printToFile(go.getOutputAsDotFormat(), "kruskals.out.dot");
+    printToFile(dotFormatConverter.getOutputAsDotFormat(mst), "kruskals.out.dot");
   }
+
   static private PrintStream makeFileStream(String fileName) throws FileNotFoundException {
-    String outputFileName = fileName;
-    File outputFile = new File(outputFileName);
+    File outputFile = new File(fileName);
     return new PrintStream(outputFile);
   }
+
   static private void printToFile(String result, String fileName) throws FileNotFoundException {
     try (PrintStream outputStream = makeFileStream(fileName)) {
       outputStream.print(result);

@@ -62,16 +62,16 @@ public class GraphGenerator {
 
   private List<Edge> generateRandomEdgesAndUpdateConnectedLists(Random random,
                                                                 List<Integer> connected, List<Integer> unconnected,
-                                                                int nodeNum) {
-    if (nodeNum <= 2) {
+                                                                int numberOfNodesInGraph) {
+    if (numberOfNodesInGraph <= 2) {
       throw new IllegalArgumentException("Node number must be more than 2");
     }
     List<Edge> edges = new ArrayList<>();
     for (int i = 0; i < NUMBER_OF_EDGES_JOINING_RANDOM_NODES_TO_CREATE; i++) {
-      int start = getRandomNode(random, nodeNum);
-      int end = getRandomNode(random, nodeNum);
+      int start = getRandomNode(random, numberOfNodesInGraph);
+      int end = getRandomNode(random, numberOfNodesInGraph);
       while (start == end) {
-        end = getRandomNode(random, nodeNum);
+        end = getRandomNode(random, numberOfNodesInGraph);
       }
       int length = getRandomLength(random);
       Edge edge = new Edge(start, end, length);
@@ -97,12 +97,12 @@ public class GraphGenerator {
                                             List<Integer> unconnected, List<Integer> connected) {
     List<Edge> edges = new ArrayList<>();
     while (!unconnected.isEmpty()) {
-      Integer nextNode = unconnected.get(random.nextInt(unconnected.size()));
-      Integer startNode = connected.get(random.nextInt(connected.size()));
+      Integer nextNodeToBeConnected = unconnected.get(random.nextInt(unconnected.size()));
+      Integer alreadyConnectedNode = connected.get(random.nextInt(connected.size()));
       int length = getRandomLength(random);
-      edges.add(new Edge(startNode, nextNode, length));
-      unconnected.remove(nextNode);
-      connected.add(nextNode);
+      edges.add(new Edge(alreadyConnectedNode, nextNodeToBeConnected, length));
+      unconnected.remove(nextNodeToBeConnected);
+      connected.add(nextNodeToBeConnected);
     }
     return edges;
   }
@@ -112,7 +112,7 @@ public class GraphGenerator {
         + lengthGeneratedMinValue;
   }
 
-  private int getRandomNode(Random random, int nodeNum) {
-      return random.nextInt(nodeNum) + 1;
+  private int getRandomNode(Random random, int maximumNodeNumber) {
+      return random.nextInt(maximumNodeNumber) + 1;
   }
 }

@@ -4,24 +4,23 @@ import structures.graph.Edge;
 import structures.graph.Graph;
 
 public class GraphIntoDotFormatConverter {
-  private Graph graph;
   private String lineSeparator = System.lineSeparator();
 
-  public GraphIntoDotFormatConverter(Graph graph) {
-    this.graph = graph;
-  }
-
-  public String getOutputAsDotFormat() {
+  public String getOutputAsDotFormat(Graph graph) {
     StringBuilder sb = new StringBuilder();
     sb.append("graph G {");
     sb.append(lineSeparator);
-    Edge[] arr = graph.getEdges();
-    for (int i = 0; i < arr.length; i++) {
-      Edge e = arr[i];
-      sb.append(String.format("%s -- %s [label=%d];\n", e.getSource(), e.getDestination(), e.getLength()));
-    }
+    appendEdgesToBuilder(graph.getEdges(), sb);
     sb.append("}");
     sb.append(lineSeparator);
     return sb.toString();
+  }
+
+  private void appendEdgesToBuilder(Edge[] edges, StringBuilder stringBuilder) {
+    for (int i = 0; i < edges.length; i++) {
+      Edge edge = edges[i];
+      stringBuilder.append(String.format("%s -- %s [label=%d];\n",
+          edge.getSource(), edge.getDestination(), edge.getLength()));
+    }
   }
 }

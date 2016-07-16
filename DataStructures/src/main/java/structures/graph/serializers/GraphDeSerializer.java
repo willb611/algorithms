@@ -13,7 +13,7 @@ import static java.lang.Integer.parseInt;
 
 /**
  * Data should be in a text file
- * First line contains the number of nodes
+ * First line contains the # of nodes
  * Rest of the lines contain edges:
  * <p>source Node #, end Node #, length.</p>
  */
@@ -21,11 +21,13 @@ public class GraphDeSerializer {
   public static Graph fromFileName(String fileName) throws IOException {
     return fromFile(new File(fileName));
   }
+
   public static Graph fromFile(File file) throws IOException {
     try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
       return fromBufferedReader(bufferedReader);
     }
   }
+
   public static Graph fromBufferedReader(BufferedReader bufferedReader) throws IOException {
     return fromLines(getLinesFromBufferedReader(bufferedReader));
   }
