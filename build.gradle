@@ -1,14 +1,16 @@
 allprojects {
     apply plugin: 'java'
     apply plugin: 'checkstyle'
+    apply plugin: 'maven'
     //sourceCompatibility = 1.8
     //targetCompatibility = 1.8
+
+    group = projectGroup
+    version = currentVersion
+
     repositories {
-        //jcenter()
-        // jcenter() shortcut doens't exist yet.
-        maven {
-            url "https://jcenter.bintray.com"
-        }
+        mavenLocal()
+        jcenter()
     }
     dependencies {
         testCompile "junit:junit:4.12"
