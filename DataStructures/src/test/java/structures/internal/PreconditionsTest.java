@@ -2,7 +2,7 @@ package structures.internal;
 
 import org.junit.Test;
 
-import static structures.internal.Preconditions.checkNotNull;
+import static internal.Preconditions.checkNotNull;
 
 public class PreconditionsTest {
 

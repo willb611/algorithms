@@ -1,16 +1,16 @@
 package structures.graph;
 
-import structures.internal.Preconditions;
+import internal.Preconditions;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class Graph {
+public class UnDirectedGraph {
   private int nodeNum;
   private Edge[] edges;
   private int totalWeight;
-  private Graph() {}
+  private UnDirectedGraph() {}
 
   public int getNodeNum() {
     return nodeNum;
@@ -39,7 +39,7 @@ public class Graph {
 
   public String toStringWithEdgesSortedInAscendingOrder() {
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("Graph with nodeNum: ").append(nodeNum)
+    stringBuilder.append("UnDirectedGraph with nodeNum: ").append(nodeNum)
         .append("number of edges: ").append(edges.length).append(System.lineSeparator())
         .append(", edges: ").append(System.lineSeparator());
     Edge[] copy = new Edge[edges.length];
@@ -79,15 +79,15 @@ public class Graph {
       return this;
     }
 
-    public Graph build() {
-      Graph graph = new Graph();
-      graph.setEdges(Preconditions.checkNotNull(edges));
-      graph.setNodeNum(Preconditions.checkNotNull(nodeNum));
+    public UnDirectedGraph build() {
+      UnDirectedGraph unDirectedGraph = new UnDirectedGraph();
+      unDirectedGraph.setEdges(Preconditions.checkNotNull(edges));
+      unDirectedGraph.setNodeNum(Preconditions.checkNotNull(nodeNum));
       if (totalWeight == null) {
-        totalWeight = graph.getEdgesAsList().stream().mapToInt(Edge::getLength).sum();
+        totalWeight = unDirectedGraph.getEdgesAsList().stream().mapToInt(Edge::getLength).sum();
       }
-      graph.setTotalWeight(totalWeight);
-      return graph;
+      unDirectedGraph.setTotalWeight(totalWeight);
+      return unDirectedGraph;
     }
   }
 }

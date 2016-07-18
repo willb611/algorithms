@@ -1,11 +1,13 @@
 package structures.graph.generation;
 
 import structures.graph.Edge;
-import structures.graph.Graph;
+import structures.graph.UnDirectedGraph;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static internal.Preconditions.checkThat;
 
 public class GraphGenerator {
   private static int DEFAULT_LENGTH_GENERATED_MAX_VALUE = 150;
@@ -22,8 +24,12 @@ public class GraphGenerator {
   final private int nodeNumMax;
   final private int nodeNumMin;
 
+  private Random random = new Random();
+
   public GraphGenerator(int maxLengthGenerated, int minLengthGenerated,
                         int maxNodeNum, int minNodeNum) {
+    checkThat(minNodeNum < maxNodeNum);
+    checkThat(minNodeNum >= 1);
     lengthGeneratedMaxValue = maxLengthGenerated;
     lengthGeneratedMinValue = minLengthGenerated;
     nodeNumMax = maxNodeNum;
@@ -34,8 +40,7 @@ public class GraphGenerator {
         DEFAULT_NODE_NUMBER_MAX_VALUE, DEFAULT_NODE_NUMBER_MIN_VALUE);
   }
 
-  public Graph makeRandomConnectedGraph() throws Exception {
-    Random random = new Random();
+  public UnDirectedGraph makeRandomConnectedGraph() throws Exception {
     int nodeNum = getNumberOfNodes(random);
     List<Integer> unconnected = new ArrayList<>();
     List<Integer> connected = new ArrayList<>();
@@ -50,7 +55,7 @@ public class GraphGenerator {
     List<Edge> edgesCreated = generateRandomEdgesAndUpdateConnectedLists(random, connected, unconnected, nodeNum);
     edgesCreated.addAll(ensureConnected(random, unconnected, connected));
 
-    return new Graph.Builder()
+    return new UnDirectedGraph.Builder()
         .withNodeNum(nodeNum)
         .withEdges(edgesCreated.toArray(new Edge[]{}))
         .build();
@@ -88,13 +93,16 @@ public class GraphGenerator {
       connected.add(edge.getSource());
     } else if (connected.contains(edge.getDestination()) && !connected.contains(edge.getSource())) {
       unconnected.remove(new Integer(edge.getSource()));
-      connected.remove(new Integer(edge.getDestination()));
+      connected.add(edge.getDestination());
     }
   }
 
 
   private List<Edge> ensureConnected(Random random,
-                                            List<Integer> unconnected, List<Integer> connected) {
+                                     List<Integer> unconnected, List<Integer> connected) {
+    if (connected == null || connected.size() <= 0) {
+      throw new IllegalArgumentException("Must be given some connected nodes");
+    }
     List<Edge> edges = new ArrayList<>();
     while (!unconnected.isEmpty()) {
       Integer nextNodeToBeConnected = unconnected.get(random.nextInt(unconnected.size()));
@@ -107,12 +115,15 @@ public class GraphGenerator {
     return edges;
   }
 
-  private int getRandomLength(Random random) {
+  public int getRandomLength(Random random) {
     return random.nextInt(lengthGeneratedMaxValue - lengthGeneratedMinValue)
         + lengthGeneratedMinValue;
   }
 
-  private int getRandomNode(Random random, int maximumNodeNumber) {
+  public int getRandomNode(int maximumNodeNumber) {
+    return getRandomNode(random, maximumNodeNumber);
+  }
+  public int getRandomNode(Random random, int maximumNodeNumber) {
       return random.nextInt(maximumNodeNumber) + 1;
   }
 }

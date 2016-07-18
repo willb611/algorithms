@@ -1,7 +1,7 @@
 package structures.graph.serializers;
 
 import structures.graph.Edge;
-import structures.graph.Graph;
+import structures.graph.UnDirectedGraph;
 
 import java.io.*;
 import java.util.ArrayDeque;
@@ -18,21 +18,21 @@ import static java.lang.Integer.parseInt;
  * <p>source Node #, end Node #, length.</p>
  */
 public class GraphDeSerializer {
-  public static Graph fromFileName(String fileName) throws IOException {
+  public static UnDirectedGraph fromFileName(String fileName) throws IOException {
     return fromFile(new File(fileName));
   }
 
-  public static Graph fromFile(File file) throws IOException {
+  public static UnDirectedGraph fromFile(File file) throws IOException {
     try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
       return fromBufferedReader(bufferedReader);
     }
   }
 
-  public static Graph fromBufferedReader(BufferedReader bufferedReader) throws IOException {
+  public static UnDirectedGraph fromBufferedReader(BufferedReader bufferedReader) throws IOException {
     return fromLines(getLinesFromBufferedReader(bufferedReader));
   }
 
-  private static Graph fromLines(Queue<String> lines) {
+  private static UnDirectedGraph fromLines(Queue<String> lines) {
     int nodeNum = parseInt(lines.poll());
     List<Edge> list = new ArrayList<>();
     while (!lines.isEmpty()) {
@@ -44,7 +44,7 @@ public class GraphDeSerializer {
       list.add(e);
     }
     Edge[] edges = list.toArray(new Edge[0]);
-    return new Graph.Builder().withEdges(edges).withNodeNum(nodeNum).build();
+    return new UnDirectedGraph.Builder().withEdges(edges).withNodeNum(nodeNum).build();
   }
 
   private static Queue<String> getLinesFromBufferedReader(BufferedReader bufferedReader) throws IOException {

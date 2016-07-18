@@ -1,13 +1,9 @@
 package algorithms.graphs.kruskals.example;
 
 import algorithms.graphs.kruskals.Kruskals;
-import structures.graph.Graph;
+import structures.graph.UnDirectedGraph;
 import structures.graph.generation.GraphGenerator;
-import structures.graph.serializers.GraphIntoDotFormatConverter;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
+import structures.graph.serializers.GraphSaver;
 
 public class KruskalsExampleUse {
 
@@ -16,28 +12,17 @@ public class KruskalsExampleUse {
   }
 
   static void test() throws Exception {
-    Graph randomConnectedGraph = new GraphGenerator().makeRandomConnectedGraph();
-    System.out.println(randomConnectedGraph.toStringWithEdgesSortedInAscendingOrder());
+    UnDirectedGraph randomConnectedUnDirectedGraph = new GraphGenerator().makeRandomConnectedGraph();
+    System.out.println(randomConnectedUnDirectedGraph.toStringWithEdgesSortedInAscendingOrder());
     System.out.println("Attempting to findMinimumSpanningTreeForGraph");
-    GraphIntoDotFormatConverter dotFormatConverter = new GraphIntoDotFormatConverter();
-    printToFile(dotFormatConverter.getOutputAsDotFormat(randomConnectedGraph), "generated.out.dot");
+    GraphSaver.saveGraph("kruskals.generated", randomConnectedUnDirectedGraph);
 
     Kruskals ks = new Kruskals();
-    Graph mst = ks.findMinimumSpanningTreeForGraph(randomConnectedGraph);
+    UnDirectedGraph mst = ks.findMinimumSpanningTreeForGraph(randomConnectedUnDirectedGraph);
     System.out.println("Printing mst");
     System.out.println(mst);
 
-    printToFile(dotFormatConverter.getOutputAsDotFormat(mst), "kruskals.out.dot");
+    GraphSaver.saveGraph("kruskals.solved", mst);
   }
 
-  static private PrintStream makeFileStream(String fileName) throws FileNotFoundException {
-    File outputFile = new File(fileName);
-    return new PrintStream(outputFile);
-  }
-
-  static private void printToFile(String result, String fileName) throws FileNotFoundException {
-    try (PrintStream outputStream = makeFileStream(fileName)) {
-      outputStream.print(result);
-    }
-  }
 }

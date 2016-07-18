@@ -3,22 +3,22 @@ package algorithms.graphs.prims;
 import structures.DisjointSet;
 import structures.DisjointSetTrackingChildren;
 import structures.graph.Edge;
-import structures.graph.Graph;
+import structures.graph.UnDirectedGraph;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Prims {
-  public Graph findMinimumSpanningTreeForGraph(Graph graph) {
-    final int numberOfEdgesNeededForMst = graph.getNodeNum() - 1;
-    Map<Integer, DisjointSetTrackingChildren> unconnectedForest = getDisjointForestOfSize(graph.getNodeNum());
+  public UnDirectedGraph findMinimumSpanningTreeForGraph(UnDirectedGraph unDirectedGraph) {
+    final int numberOfEdgesNeededForMst = unDirectedGraph.getNodeNum() - 1;
+    Map<Integer, DisjointSetTrackingChildren> unconnectedForest = getDisjointForestOfSize(unDirectedGraph.getNodeNum());
     List<Edge> edgesInMst = new ArrayList<>(numberOfEdgesNeededForMst);
 
     DisjointSetTrackingChildren root = unconnectedForest.values().stream().findFirst().get();
     while (!unconnectedForest.isEmpty()) {
-      SortedSet<Edge> edgesToConsider = getEdgesConnectedToOneDisjointSet(graph.getEdges(), root.getChildren());
+      SortedSet<Edge> edgesToConsider = getEdgesConnectedToOneDisjointSet(unDirectedGraph.getEdges(), root.getChildren());
       if (edgesToConsider.isEmpty()) {
-        throw new IllegalArgumentException("Given graph was not connected");
+        throw new IllegalArgumentException("Given unDirectedGraph was not connected");
       } else {
         Edge edge = edgesToConsider.first();
         if (edge.getSource() == root.getId()) {
@@ -29,8 +29,8 @@ public class Prims {
       }
     }
 
-    Graph.Builder builder = new Graph.Builder();
-    builder.withNodeNum(graph.getNodeNum());
+    UnDirectedGraph.Builder builder = new UnDirectedGraph.Builder();
+    builder.withNodeNum(unDirectedGraph.getNodeNum());
     builder.withEdges(edgesInMst);
     return builder.build();
   }

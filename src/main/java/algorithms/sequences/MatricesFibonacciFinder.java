@@ -2,7 +2,7 @@ package algorithms.sequences;
 
 import java.math.BigInteger;
 
-import static structures.internal.Preconditions.checkNotNull;
+import static internal.Preconditions.checkNotNull;
 
 public class MatricesFibonacciFinder implements FibonacciFinder {
 

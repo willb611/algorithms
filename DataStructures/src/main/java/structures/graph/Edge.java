@@ -15,6 +15,7 @@ public class Edge implements Comparable<Edge> {
     return length;
   }
 
+  @Override
   public String toString() {
     return "source: " + getSource() + " destination: " + getDestination() + " length: " + getLength();
   }

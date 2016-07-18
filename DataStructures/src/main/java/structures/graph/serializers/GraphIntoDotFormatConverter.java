@@ -1,16 +1,16 @@
 package structures.graph.serializers;
 
 import structures.graph.Edge;
-import structures.graph.Graph;
+import structures.graph.UnDirectedGraph;
 
 public class GraphIntoDotFormatConverter {
   private String lineSeparator = System.lineSeparator();
 
-  public String getOutputAsDotFormat(Graph graph) {
+  public String getOutputAsDotFormat(UnDirectedGraph unDirectedGraph) {
     StringBuilder sb = new StringBuilder();
-    sb.append("graph G {");
+    sb.append("Graph G {");
     sb.append(lineSeparator);
-    appendEdgesToBuilder(graph.getEdges(), sb);
+    appendEdgesToBuilder(unDirectedGraph.getEdges(), sb);
     sb.append("}");
     sb.append(lineSeparator);
     return sb.toString();
