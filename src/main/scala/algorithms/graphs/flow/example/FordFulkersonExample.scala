@@ -10,7 +10,7 @@ object FordFulkersonExample extends App {
   runExample()
 
   def getGraph(generator: GraphGenerator): UnDirectedGraph = {
-    GraphDeSerializer.fromFileName(prefix + ".original")
+//    GraphDeSerializer.fromFileName(prefix + ".original")
     generator.makeRandomConnectedGraph()
   }
 
