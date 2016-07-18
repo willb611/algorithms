@@ -3,7 +3,7 @@ package algorithms.graphs.kruskals.example;
 import algorithms.graphs.kruskals.Kruskals;
 import structures.graph.UnDirectedGraph;
 import structures.graph.generation.GraphGenerator;
-import structures.graph.serializers.GraphSaver;
+import structures.graph.persistence.GraphSaver;
 
 public class KruskalsExampleUse {
 

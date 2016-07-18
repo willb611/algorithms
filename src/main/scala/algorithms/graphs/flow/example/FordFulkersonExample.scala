@@ -3,7 +3,7 @@ package algorithms.graphs.flow.example
 import algorithms.graphs.flow.FordFulkerson
 import structures.graph.UnDirectedGraph
 import structures.graph.generation.GraphGenerator
-import structures.graph.serializers.{GraphDeSerializer, GraphSaver}
+import structures.graph.persistence.{GraphDeSerializer, GraphSaver}
 
 object FordFulkersonExample extends App {
   var prefix = "fordFulkerson"

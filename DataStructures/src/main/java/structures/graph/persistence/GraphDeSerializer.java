@@ -1,4 +1,4 @@
-package structures.graph.serializers;
+package structures.graph.persistence;
 
 import structures.graph.Edge;
 import structures.graph.UnDirectedGraph;

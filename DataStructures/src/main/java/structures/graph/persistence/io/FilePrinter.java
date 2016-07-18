@@ -1,4 +1,4 @@
-package structures.graph.serializers.io;
+package structures.graph.persistence.io;
 
 import java.io.File;
 import java.io.FileNotFoundException;

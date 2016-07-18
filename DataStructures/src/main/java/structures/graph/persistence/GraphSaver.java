@@ -1,7 +1,7 @@
-package structures.graph.serializers;
+package structures.graph.persistence;
 
 import structures.graph.UnDirectedGraph;
-import structures.graph.serializers.io.FilePrinter;
+import structures.graph.persistence.io.FilePrinter;
 
 import java.io.FileNotFoundException;
 
