@@ -12,12 +12,11 @@ import java.util.Collection;
 
 @RunWith(Parameterized.class)
 public class FibonacciFinderTest {
-  public static final int nthTermBiggerThanUsedInTest = 100;
 
   @Parameterized.Parameters
   public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][] {
-        {new CachingFibonacciFinder(nthTermBiggerThanUsedInTest)},
+        {new CachingFibonacciFinder()},
         {new MatricesFibonacciFinder()},
         {new NaiveFibonacciFinder()}
     });
@@ -60,5 +59,4 @@ public class FibonacciFinderTest {
     assertEquals(expected, fibonacciFinder.findNthTermInSequence(25));
     assertEquals(expected, fibonacciFinder.findNthTermInSequence(25));
   }
-
 }

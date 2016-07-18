@@ -2,15 +2,23 @@ package algorithms.sequences;
 
 import java.math.BigInteger;
 
+import static internal.Preconditions.checkThat;
+
 // Useful if you calc fib lots of times
 public class CachingFibonacciFinder implements FibonacciFinder {
   private BigInteger[] storedResults;
 
+  public CachingFibonacciFinder() {
+    this(100);
+  }
+
   public CachingFibonacciFinder(int max) {
-    if (max < 0) {
-      throw new IllegalArgumentException("Can only find fibonacci numbers of at least 0");
-    }
+    checkThat(max > 0, "Can only find fibonacci numbers of at least 0");
     max = Math.max(2, max);
+    initialize(max);
+  }
+
+  private void initialize(int max) {
     storedResults = new BigInteger[max + 1];
     storedResults[0] = BigInteger.ONE;
     storedResults[1] = BigInteger.ONE;
@@ -22,8 +30,8 @@ public class CachingFibonacciFinder implements FibonacciFinder {
     if (n <= 2) {
       return BigInteger.ONE;
     } else if (n > storedResults.length) {
-      throw new IllegalArgumentException("Only saving values up to " + storedResults.length
-          + " but asked to findMinimumSpanningTreeForGraph for nth fibonacci number, n: " + n);
+      initialize(n);
+      return findNthTermInSequence(n);
     }
     int startIndex = 2;
     while (storedResults[startIndex] != null && startIndex < n) {
