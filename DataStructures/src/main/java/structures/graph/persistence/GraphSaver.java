@@ -10,4 +10,10 @@ public class GraphSaver {
     FilePrinter.printToFile(GraphSerializer.serialize(graph), baseFileName + ".original");
     FilePrinter.printToFile(new GraphIntoDotFormatConverter().getOutputAsDotFormat(graph), baseFileName + ".dot");
   }
+  public static void saveGraph(String baseFileName, UnDirectedGraph graph,
+                               Integer source, Integer sink) throws FileNotFoundException {
+    FilePrinter.printToFile(GraphSerializer.serialize(graph), baseFileName + ".original");
+    FilePrinter.printToFile(new GraphIntoDotFormatConverter().getOutputAsDotFormat(graph, source, sink),
+        baseFileName + ".dot");
+  }
 }

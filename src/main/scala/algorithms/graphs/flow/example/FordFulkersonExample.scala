@@ -10,21 +10,21 @@ object FordFulkersonExample extends App {
   runExample()
 
   def getGraph(generator: GraphGenerator): UnDirectedGraph = {
-    GraphDeSerializer.fromFileName(prefix + ".original")
+//    GraphDeSerializer.fromFileName(prefix + ".original")
     generator.makeRandomConnectedGraph()
   }
 
   def runExample(): Unit = {
     val generator = new GraphGenerator(15, 1, 5, 3)
     val graph = getGraph(generator)
-    GraphSaver.saveGraph(prefix, graph)
     val source = generator.getRandomNode(graph.getNodeNum)
-    var destination = generator.getRandomNode(graph.getNodeNum)
-    while (destination == source) {
-      destination = generator.getRandomNode(graph.getNodeNum)
+    var sink = generator.getRandomNode(graph.getNodeNum)
+    while (sink == source) {
+      sink = generator.getRandomNode(graph.getNodeNum)
     }
-    System.out.println("Source: " + source + ", destination: " + destination)
-    val maxFlow = new FordFulkerson().maxFlow(graph, source, destination)
+    GraphSaver.saveGraph(prefix, graph, source, sink)
+    System.out.println("Source: " + source + ", destination: " + sink)
+    val maxFlow = new FordFulkerson().maxFlow(graph, source, sink)
     System.out.println("MaxFlow: " + maxFlow)
   }
 
