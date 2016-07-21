@@ -1,6 +1,9 @@
-*.class
-.idea
 .gradle
+
+#### IDE settings
+*.ipr
+*.iws
+.idea
 build
 
 # OS generated files #
