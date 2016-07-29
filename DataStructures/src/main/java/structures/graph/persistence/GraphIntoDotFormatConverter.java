@@ -31,13 +31,13 @@ public class GraphIntoDotFormatConverter {
           startLabel, endLabel, edge.getLength()));
     }
   }
-  private String getLabelFor(int i, Integer graphSource, Integer graphSink) {
-    if (i == graphSink) {
-      return "Snk" + i + "";
-    } else if (i == graphSource) {
-      return "Src" + i + "";
+  private String getLabelFor(int nodeToGetLabelFor, Integer graphSource, Integer graphSink) {
+    if (graphSink != null && graphSink == nodeToGetLabelFor) {
+      return "Snk" + nodeToGetLabelFor + "";
+    } else if (graphSource != null && graphSource == nodeToGetLabelFor) {
+      return "Src" + nodeToGetLabelFor + "";
     } else {
-      return String.valueOf(i);
+      return String.valueOf(nodeToGetLabelFor);
     }
   }
 }
