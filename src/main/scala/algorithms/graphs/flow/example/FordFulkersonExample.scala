@@ -1,11 +1,13 @@
 package algorithms.graphs.flow.example
 
 import algorithms.graphs.flow.FordFulkerson
+import org.slf4j.LoggerFactory
 import structures.graph.UnDirectedGraph
 import structures.graph.generation.GraphGenerator
-import structures.graph.persistence.{GraphDeSerializer, GraphSaver}
+import structures.graph.persistence.GraphSaver
 
 object FordFulkersonExample extends App {
+  var logger = LoggerFactory.getLogger(this.getClass);
   var prefix = "fordFulkerson"
   runExample()
 
@@ -23,9 +25,9 @@ object FordFulkersonExample extends App {
       sink = generator.getRandomNode(graph.getNodeNum)
     }
     GraphSaver.saveGraph(prefix, graph, source, sink)
-    System.out.println("Source: " + source + ", destination: " + sink)
+    logger.info("Source: " + source + ", destination: " + sink)
     val maxFlow = new FordFulkerson().maxFlow(graph, source, sink)
-    System.out.println("MaxFlow: " + maxFlow)
+    logger.info("MaxFlow: " + maxFlow)
   }
 
 }
