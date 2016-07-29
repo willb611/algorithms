@@ -24,7 +24,7 @@ object FordFulkersonExample extends App {
     while (sink == source) {
       sink = generator.getRandomNode(graph.getNodeNum)
     }
-    GraphSaver.saveGraph(prefix, graph, source, sink)
+    new GraphSaver().saveGraph(prefix, graph, source, sink)
     logger.info("Source: " + source + ", destination: " + sink)
     val maxFlow = new FordFulkerson().maxFlow(graph, source, sink)
     logger.info("MaxFlow: " + maxFlow)

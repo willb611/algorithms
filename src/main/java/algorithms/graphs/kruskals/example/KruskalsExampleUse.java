@@ -11,21 +11,21 @@ public class KruskalsExampleUse {
   private static Logger logger = LoggerFactory.getLogger(KruskalsExampleUse.class);
 
   public static void main(String[] ags) throws Exception {
-    test();
+    test(new GraphSaver());
   }
 
-  static void test() throws Exception {
+  static void test(GraphSaver graphSaver) throws Exception {
     UnDirectedGraph randomConnectedUnDirectedGraph = new GraphGenerator().makeRandomConnectedGraph();
     logger.info(randomConnectedUnDirectedGraph.toStringWithEdgesSortedInAscendingOrder());
     logger.info("Attempting to findMinimumSpanningTreeForGraph");
-    GraphSaver.saveGraph("kruskals.generated", randomConnectedUnDirectedGraph);
+    graphSaver.saveGraph("kruskals.generated", randomConnectedUnDirectedGraph);
 
     Kruskals ks = new Kruskals();
     UnDirectedGraph mst = ks.findMinimumSpanningTreeForGraph(randomConnectedUnDirectedGraph);
     logger.info("Printing mst");
     logger.info(mst.toString());
 
-    GraphSaver.saveGraph("kruskals.solved", mst);
+    graphSaver.saveGraph("kruskals.solved", mst);
   }
 
 }
