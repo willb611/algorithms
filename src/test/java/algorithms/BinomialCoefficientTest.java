@@ -11,9 +11,11 @@ public class BinomialCoefficientTest {
     BinomialCoefficient.nChooseK(-1, 2);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testZeroN() {
-    BinomialCoefficient.nChooseK(0, 2);
+    int expected = 0;
+    int actual = BinomialCoefficient.nChooseK(0, 2);
+    assertEquals(expected, actual);
   }
 
   @Test

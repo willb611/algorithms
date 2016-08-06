@@ -1,4 +1,4 @@
-package structures.internal;
+package internal;
 
 import org.junit.Test;
 
