@@ -18,26 +18,23 @@ public class GraphGenerator {
 
   private static int NUMBER_OF_EDGES_JOINING_RANDOM_NODES_TO_CREATE = 7;
 
-  final private int lengthGeneratedMaxValue;
-  final private int lengthGeneratedMinValue;
-
-  final private int nodeNumMax;
-  final private int nodeNumMin;
+  final private Range lengthGeneratedRange;
+  final private Range nodeNumberGeneratedRange;
 
   private Random random = new Random();
 
-  public GraphGenerator(int maxLengthGenerated, int minLengthGenerated,
-                        int maxNodeNum, int minNodeNum) {
-    checkThat(minNodeNum < maxNodeNum);
-    checkThat(minNodeNum >= 1);
-    lengthGeneratedMaxValue = maxLengthGenerated;
-    lengthGeneratedMinValue = minLengthGenerated;
-    nodeNumMax = maxNodeNum;
-    nodeNumMin = minNodeNum;
+  public GraphGenerator(Range rangeOfEdgeLengthToGenerate,
+                        Range rangeOfNodeNumberToGenerate) {
+    if (rangeOfNodeNumberToGenerate.getMin() <= 1) {
+      throw new IllegalArgumentException("Range for node number must have min greater than 1. Given: "
+          + rangeOfNodeNumberToGenerate.getMin());
+    }
+    lengthGeneratedRange = rangeOfEdgeLengthToGenerate;
+    nodeNumberGeneratedRange = rangeOfNodeNumberToGenerate;
   }
   public GraphGenerator() {
-    this(DEFAULT_LENGTH_GENERATED_MAX_VALUE, DEFAULT_LENGTH_GENERATED_MIN_VALUE,
-        DEFAULT_NODE_NUMBER_MAX_VALUE, DEFAULT_NODE_NUMBER_MIN_VALUE);
+    this(new Range(DEFAULT_LENGTH_GENERATED_MIN_VALUE, DEFAULT_LENGTH_GENERATED_MAX_VALUE),
+        new Range(DEFAULT_NODE_NUMBER_MIN_VALUE, DEFAULT_NODE_NUMBER_MAX_VALUE));
   }
 
   public UnDirectedGraph makeRandomConnectedGraph() throws Exception {
@@ -59,10 +56,6 @@ public class GraphGenerator {
         .withNodeNum(nodeNum)
         .withEdges(edgesCreated.toArray(new Edge[]{}))
         .build();
-  }
-
-  private int getNumberOfNodes(Random random) {
-    return random.nextInt(nodeNumMax - nodeNumMin) + nodeNumMin;
   }
 
   private List<Edge> generateRandomEdgesAndUpdateConnectedLists(Random random,
@@ -115,15 +108,21 @@ public class GraphGenerator {
     return edges;
   }
 
-  public int getRandomLength(Random random) {
-    return random.nextInt(lengthGeneratedMaxValue - lengthGeneratedMinValue)
-        + lengthGeneratedMinValue;
+  private int getRandomLength(Random random) {
+    return getRandomInRange(random, lengthGeneratedRange);
+  }
+  private int getNumberOfNodes(Random random) {
+    return getRandomInRange(random, nodeNumberGeneratedRange);
   }
 
-  public int getRandomNode(int maximumNodeNumber) {
+  public int getRandomInRange(Random random, Range range) {
+    return random.nextInt(range.getMax() - range.getMin()) + range.getMin();
+  }
+
+  private int getRandomNode(int maximumNodeNumber) {
     return getRandomNode(random, maximumNodeNumber);
   }
-  public int getRandomNode(Random random, int maximumNodeNumber) {
+  private int getRandomNode(Random random, int maximumNodeNumber) {
       return random.nextInt(maximumNodeNumber) + 1;
   }
 }
