@@ -51,13 +51,7 @@ public class Prims {
   private SortedSet<Edge> getEdgesConnectedToOneIncludedNode(Edge[] edges, Collection<Integer> included) {
     SortedSet<Edge> sorted = new TreeSet<>();
     for (Edge edge : edges) {
-      if (included.contains(edge.getSource())) {
-        if (included.contains(edge.getDestination())) {
-          // adding would form a cycle,
-        } else {
-          sorted.add(edge);
-        }
-      } else if (included.contains(edge.getDestination())) {
+      if (edge.sourceOrDestinationButNotBothContainedIn(included)) {
         sorted.add(edge);
       }
     }

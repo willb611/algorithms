@@ -1,5 +1,8 @@
 package structures.graph;
 
+import java.util.Collection;
+import java.util.List;
+
 public class Edge implements Comparable<Edge> {
   private final int source;
   private final int destination;
@@ -30,5 +33,13 @@ public class Edge implements Comparable<Edge> {
 
   public int getDestination() {
     return destination;
+  }
+
+  public boolean sourceOrDestinationButNotBothContainedIn(Collection<Integer> integers) {
+    if (integers.contains(getSource())) {
+      return !integers.contains(getDestination());
+    } else {
+      return integers.contains(getDestination());
+    }
   }
 }
