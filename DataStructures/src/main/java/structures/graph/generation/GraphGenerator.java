@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static internal.Preconditions.checkThat;
-
 public class GraphGenerator {
   private static int DEFAULT_LENGTH_GENERATED_MAX_VALUE = 150;
   private static int DEFAULT_LENGTH_GENERATED_MIN_VALUE = 50;
@@ -119,10 +117,10 @@ public class GraphGenerator {
     return random.nextInt(range.getMax() - range.getMin()) + range.getMin();
   }
 
-  private int getRandomNode(int maximumNodeNumber) {
+  public int getRandomNode(int maximumNodeNumber) {
     return getRandomNode(random, maximumNodeNumber);
   }
-  private int getRandomNode(Random random, int maximumNodeNumber) {
+  public int getRandomNode(Random random, int maximumNodeNumber) {
       return random.nextInt(maximumNodeNumber) + 1;
   }
 }
