@@ -17,7 +17,8 @@ object FordFulkersonExample extends App {
   }
 
   def runExample(): Unit = {
-    val generator = new GraphGenerator(15, 1, 5, 3)
+    val generator = new GraphGenerator(new structures.graph.generation.Range(1, 15),
+      new structures.graph.generation.Range(3, 5))
     val graph = getGraph(generator)
     val source = generator.getRandomNode(graph.getNodeNum)
     var sink = generator.getRandomNode(graph.getNodeNum)

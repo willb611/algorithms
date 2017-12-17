@@ -1,8 +1,5 @@
-package algorithms;
+package algorithms.binomial;
 
-import algorithms.binomial.BinomialCoefficient;
-import algorithms.binomial.BinomialCoefficientAdditive;
-import algorithms.binomial.BinomialCoefficientMultiplicative;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
