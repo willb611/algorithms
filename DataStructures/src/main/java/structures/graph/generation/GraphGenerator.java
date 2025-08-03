@@ -8,18 +8,18 @@ import java.util.List;
 import java.util.Random;
 
 public class GraphGenerator {
-  private static int DEFAULT_LENGTH_GENERATED_MAX_VALUE = 150;
-  private static int DEFAULT_LENGTH_GENERATED_MIN_VALUE = 50;
+  private static final int DEFAULT_LENGTH_GENERATED_MAX_VALUE = 150;
+  private static final int DEFAULT_LENGTH_GENERATED_MIN_VALUE = 50;
 
-  private static int DEFAULT_NODE_NUMBER_MAX_VALUE = 15;
-  private static int DEFAULT_NODE_NUMBER_MIN_VALUE = 5;
+  private static final int DEFAULT_NODE_NUMBER_MAX_VALUE = 15;
+  private static final int DEFAULT_NODE_NUMBER_MIN_VALUE = 5;
 
-  private static int NUMBER_OF_EDGES_JOINING_RANDOM_NODES_TO_CREATE = 7;
+  private static final int NUMBER_OF_EDGES_JOINING_RANDOM_NODES_TO_CREATE = 7;
 
   final private Range lengthGeneratedRange;
   final private Range nodeNumberGeneratedRange;
 
-  private Random random = new Random();
+  private final Random random = new Random();
 
   public GraphGenerator(Range rangeOfEdgeLengthToGenerate,
                         Range rangeOfNodeNumberToGenerate) {
@@ -45,7 +45,7 @@ public class GraphGenerator {
     // Connect 1 node
     int root = getRandomNode(random, nodeNum);
     connected.add(root);
-    unconnected.remove(new Integer(root));
+    unconnected.remove(Integer.valueOf(root));
 
     List<Edge> edgesCreated = generateRandomEdgesAndUpdateConnectedLists(random, connected, unconnected, nodeNum);
     edgesCreated.addAll(ensureConnected(random, unconnected, connected));
@@ -80,10 +80,10 @@ public class GraphGenerator {
   private void updateConnectivityWithEdge(List<Integer> connected, List<Integer> unconnected,
                                                  Edge edge) {
     if (connected.contains(edge.getSource()) && !connected.contains(edge.getDestination())) {
-      unconnected.remove(new Integer(edge.getDestination()));
+      unconnected.remove(Integer.valueOf(edge.getDestination()));
       connected.add(edge.getSource());
     } else if (connected.contains(edge.getDestination()) && !connected.contains(edge.getSource())) {
-      unconnected.remove(new Integer(edge.getSource()));
+      unconnected.remove(Integer.valueOf(edge.getSource()));
       connected.add(edge.getDestination());
     }
   }
