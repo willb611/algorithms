@@ -3,7 +3,8 @@ package algorithms.binomial;
 import java.util.Arrays;
 
 public class BinomialCoefficientAdditive implements BinomialCoefficient {
-  private long[][] calculatedValues = new long[10000][10000];
+  private static final int arraySize = 1000;
+  private final long[][] calculatedValues = new long[arraySize][arraySize];
 
   public BinomialCoefficientAdditive() {
     for (int i = 0; i < calculatedValues.length; i++) {
