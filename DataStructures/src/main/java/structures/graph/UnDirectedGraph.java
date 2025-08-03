@@ -40,7 +40,7 @@ public class UnDirectedGraph {
   public String toStringWithEdgesSortedInAscendingOrder() {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("UnDirectedGraph with nodeNum: ").append(nodeNum)
-        .append("number of edges: ").append(edges.length).append(System.lineSeparator())
+        .append(" ,number of edges: ").append(edges.length)
         .append(", edges: ").append(System.lineSeparator());
     Edge[] copy = new Edge[edges.length];
     System.arraycopy(edges, 0, copy, 0, edges.length);
