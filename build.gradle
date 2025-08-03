@@ -1,7 +1,6 @@
 allprojects {
     apply plugin: 'java'
     apply plugin: 'checkstyle'
-    apply plugin: 'maven'
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
@@ -10,18 +9,20 @@ allprojects {
 
     repositories {
         mavenLocal()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
-        testCompile "junit:junit:4.12"
+        implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
+        testImplementation "junit:junit:4.12"
+        //implementation 'org.owasp:dependency-check-gradle:3.0.1'
     }
     checkstyle {
         configFile = file("${project.rootDir}/config/checkstyle.xml")
         toolVersion = '6.19'
     }
+    //apply plugin: 'org.owasp.dependencycheck'
 }
 
 dependencies {
-    compile project(":DataStructures")
+    implementation project(":DataStructures")
 }
